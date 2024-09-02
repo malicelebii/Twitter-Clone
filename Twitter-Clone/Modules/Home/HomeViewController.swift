@@ -11,7 +11,7 @@ class HomeViewController: UIViewController {
 
     let timelineTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TweetTableViewCell.self, forCellReuseIdentifier: TweetTableViewCell.identifier)
         return tableView
     }()
     
@@ -42,10 +42,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        var content = cell.defaultContentConfiguration()
-        content.text = "Tweet"
-        cell.contentConfiguration = content
+        let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier, for: indexPath) as! TweetTableViewCell
+        cell.avatarImageView.image = UIImage(systemName: "person")
+        cell.displayNameLabel.text = "Mehmet Ali Çelebi"
+        cell.usernameLabel.text = "@malicelebi"
         return cell
     }
 }
