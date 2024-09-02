@@ -23,6 +23,7 @@ class ProfileViewController: UIViewController {
         addSubviews()
         setupProfileTableView()
         configureConstraints()
+        configureProfileHeader()
     }
     
     func addSubviews() {
@@ -42,11 +43,16 @@ class ProfileViewController: UIViewController {
             profileTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
+    
+    func configureProfileHeader() {
+        let headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0, width: profileTableView.frame.width, height: 390))
+        profileTableView.tableHeaderView = headerView
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
