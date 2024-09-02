@@ -89,6 +89,7 @@ class TweetTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addContentSubviews()
         configureConstraints()
+        configureButtons()
     }
     
     required init?(coder: NSCoder) {
@@ -140,5 +141,28 @@ class TweetTableViewCell: UITableViewCell {
             shareButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
             
         ])
+    }
+    
+    func configureButtons() {
+        replyButton.addTarget(self, action: #selector(didTapReply), for: .touchUpInside)
+        retweetButton.addTarget(self, action: #selector(didTapRetweet), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(didTapLike), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(didTapShare), for: .touchUpInside)
+    }
+    
+    @objc func didTapReply() {
+        delegate?.didTapReply()
+    }
+    
+    @objc func didTapRetweet() {
+        delegate?.didTapRetweet()
+    }
+    
+    @objc func didTapLike() {
+        delegate?.didTapLike()
+    }
+    
+    @objc func didTapShare() {
+        delegate?.didTapShare()
     }
 }
