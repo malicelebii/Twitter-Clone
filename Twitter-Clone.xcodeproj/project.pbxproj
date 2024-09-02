@@ -64,7 +64,6 @@
 			children = (
 				35C8F3C72C85B41000123A91 /* Modules */,
 				35C8F3C62C85B40200123A91 /* Application */,
-				35C8F3B62C85B16000123A91 /* MainTabBarViewController.swift */,
 				35C8F3BB2C85B16100123A91 /* Assets.xcassets */,
 			);
 			path = "Twitter-Clone";
@@ -84,6 +83,7 @@
 		35C8F3C72C85B41000123A91 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				35C8F3D42C85B82800123A91 /* MainTabBar */,
 				35C8F3D12C85B55600123A91 /* DirectMessages */,
 				35C8F3CE2C85B54700123A91 /* Notifications */,
 				35C8F3CB2C85B52F00123A91 /* Search */,
@@ -122,6 +122,14 @@
 				35C8F3D22C85B56800123A91 /* DirectMessagesViewController.swift */,
 			);
 			path = DirectMessages;
+			sourceTree = "<group>";
+		};
+		35C8F3D42C85B82800123A91 /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				35C8F3B62C85B16000123A91 /* MainTabBarViewController.swift */,
+			);
+			path = MainTabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,7 +354,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RP5XZC93SV;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Twitter-Clone/Info.plist";
+				INFOPLIST_FILE = "Twitter-Clone/Application/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -373,7 +381,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RP5XZC93SV;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Twitter-Clone/Info.plist";
+				INFOPLIST_FILE = "Twitter-Clone/Application/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
