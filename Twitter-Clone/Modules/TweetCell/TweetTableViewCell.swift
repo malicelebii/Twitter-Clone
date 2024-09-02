@@ -44,6 +44,38 @@ class TweetTableViewCell: UITableViewCell {
         return label
     }()
     
+    let replyButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "bubble.left"), for: .normal)
+        button.tintColor = .systemGray2
+        return button
+    }()
+    
+    let retweetButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "arrow.2.squarepath"), for: .normal)
+        button.tintColor = .systemGray2
+        return button
+    }()
+    
+    let likeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.tintColor = .systemGray2
+        return button
+    }()
+    
+    let shareButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+        button.tintColor = .systemGray2
+        return button
+    }()
+   
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addContentSubviews()
@@ -59,6 +91,10 @@ class TweetTableViewCell: UITableViewCell {
         contentView.addSubview(displayNameLabel)
         contentView.addSubview(usernameLabel)
         contentView.addSubview(tweetTextContentLabel)
+        contentView.addSubview(replyButton)
+        contentView.addSubview(retweetButton)
+        contentView.addSubview(likeButton)
+        contentView.addSubview(shareButton)
     }
     
     func configureConstraints() {
@@ -76,8 +112,24 @@ class TweetTableViewCell: UITableViewCell {
             
             tweetTextContentLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 20),
             tweetTextContentLabel.topAnchor.constraint(equalTo: displayNameLabel.bottomAnchor, constant: 10),
-            tweetTextContentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
             tweetTextContentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            
+            replyButton.leadingAnchor.constraint(equalTo: tweetTextContentLabel.leadingAnchor),
+            replyButton.topAnchor.constraint(equalTo: tweetTextContentLabel.bottomAnchor, constant: 10),
+            replyButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+            
+            retweetButton.leadingAnchor.constraint(equalTo: replyButton.trailingAnchor, constant: 60),
+            retweetButton.topAnchor.constraint(equalTo: replyButton.topAnchor),
+            retweetButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+            
+            likeButton.leadingAnchor.constraint(equalTo: retweetButton.trailingAnchor, constant: 60),
+            likeButton.topAnchor.constraint(equalTo: replyButton.topAnchor),
+            likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+            
+            shareButton.leadingAnchor.constraint(equalTo: likeButton.trailingAnchor, constant: 60),
+            shareButton.topAnchor.constraint(equalTo: replyButton.topAnchor),
+            shareButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+            
         ])
     }
 }
