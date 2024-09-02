@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		35C8F3B32C85B16000123A91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F3B22C85B16000123A91 /* AppDelegate.swift */; };
 		35C8F3B52C85B16000123A91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F3B42C85B16000123A91 /* SceneDelegate.swift */; };
-		35C8F3B72C85B16000123A91 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F3B62C85B16000123A91 /* ViewController.swift */; };
+		35C8F3B72C85B16000123A91 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F3B62C85B16000123A91 /* MainTabBarViewController.swift */; };
 		35C8F3BC2C85B16100123A91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35C8F3BB2C85B16100123A91 /* Assets.xcassets */; };
 		35C8F3BF2C85B16100123A91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35C8F3BD2C85B16100123A91 /* LaunchScreen.storyboard */; };
+		35C8F3CA2C85B42000123A91 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F3C92C85B42000123A91 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		35C8F3AF2C85B16000123A91 /* Twitter-Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Twitter-Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35C8F3B22C85B16000123A91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35C8F3B42C85B16000123A91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		35C8F3B62C85B16000123A91 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		35C8F3B62C85B16000123A91 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		35C8F3BB2C85B16100123A91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35C8F3BE2C85B16100123A91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35C8F3C02C85B16100123A91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		35C8F3C92C85B42000123A91 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,39 @@
 		35C8F3B12C85B16000123A91 /* Twitter-Clone */ = {
 			isa = PBXGroup;
 			children = (
-				35C8F3B22C85B16000123A91 /* AppDelegate.swift */,
-				35C8F3B42C85B16000123A91 /* SceneDelegate.swift */,
-				35C8F3B62C85B16000123A91 /* ViewController.swift */,
+				35C8F3C72C85B41000123A91 /* Modules */,
+				35C8F3C62C85B40200123A91 /* Application */,
+				35C8F3B62C85B16000123A91 /* MainTabBarViewController.swift */,
 				35C8F3BB2C85B16100123A91 /* Assets.xcassets */,
-				35C8F3BD2C85B16100123A91 /* LaunchScreen.storyboard */,
-				35C8F3C02C85B16100123A91 /* Info.plist */,
 			);
 			path = "Twitter-Clone";
+			sourceTree = "<group>";
+		};
+		35C8F3C62C85B40200123A91 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				35C8F3C02C85B16100123A91 /* Info.plist */,
+				35C8F3B22C85B16000123A91 /* AppDelegate.swift */,
+				35C8F3B42C85B16000123A91 /* SceneDelegate.swift */,
+				35C8F3BD2C85B16100123A91 /* LaunchScreen.storyboard */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		35C8F3C72C85B41000123A91 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				35C8F3C82C85B41400123A91 /* Home */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		35C8F3C82C85B41400123A91 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				35C8F3C92C85B42000123A91 /* HomeViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,9 +161,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35C8F3B72C85B16000123A91 /* ViewController.swift in Sources */,
+				35C8F3B72C85B16000123A91 /* MainTabBarViewController.swift in Sources */,
 				35C8F3B32C85B16000123A91 /* AppDelegate.swift in Sources */,
 				35C8F3B52C85B16000123A91 /* SceneDelegate.swift in Sources */,
+				35C8F3CA2C85B42000123A91 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
