@@ -50,7 +50,8 @@ class HomeViewController: UIViewController {
     }
     
     @objc func didTapProfile() {
-        print("pressed profile")
+        let vc = ProfileViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
