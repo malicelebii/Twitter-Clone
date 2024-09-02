@@ -7,8 +7,17 @@
 
 import UIKit
 
+protocol TweetTableViewCellDelegate: AnyObject {
+    func didTapReply()
+    func didTapRetweet()
+    func didTapLike()
+    func didTapShare()
+}
+
 class TweetTableViewCell: UITableViewCell {
     static let identifier = "TweetTableViewCell"
+    
+    weak var delegate: TweetTableViewCellDelegate?
     
     let avatarImageView: UIImageView = {
         let imageView = UIImageView()

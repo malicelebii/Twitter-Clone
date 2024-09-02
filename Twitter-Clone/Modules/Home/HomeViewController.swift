@@ -43,9 +43,30 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier, for: indexPath) as! TweetTableViewCell
+        cell.delegate = self
         cell.avatarImageView.image = UIImage(systemName: "person")
         cell.displayNameLabel.text = "Mehmet Ali Çelebi"
         cell.usernameLabel.text = "@malicelebi"
         return cell
     }
+}
+
+extension HomeViewController: TweetTableViewCellDelegate {
+    func didTapReply() {
+        print("reply")
+    }
+    
+    func didTapRetweet() {
+        print("retweet")
+    }
+    
+    func didTapLike() {
+        print("like")
+    }
+    
+    func didTapShare() {
+        print("share")
+    }
+    
+    
 }
