@@ -55,6 +55,7 @@ class OnboardingViewController: UIViewController {
         view.backgroundColor = .systemBackground
         addSubviews()
         configureConstraints()
+        setupCreateAccountButton()
     }
     
     func addSubviews() {
@@ -83,5 +84,14 @@ class OnboardingViewController: UIViewController {
           
         
         ])
+    }
+    
+    func setupCreateAccountButton() {
+        createAccountButton.addTarget(self, action: #selector(didTapCreateAccount), for: .touchUpInside)
+    }
+    
+    @objc func didTapCreateAccount() {
+        let vc = UINavigationController(rootViewController: RegisterViewController())
+        present(vc, animated: true)
     }
 }

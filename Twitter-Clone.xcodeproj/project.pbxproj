@@ -28,6 +28,7 @@
 		35C8F4092C870D8100123A91 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 35C8F4082C870D8100123A91 /* FirebaseStorage */; };
 		35C8F40B2C870D8100123A91 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 35C8F40A2C870D8100123A91 /* FirebaseStorageCombine-Community */; };
 		35C8F4112C87115900123A91 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4102C87115900123A91 /* OnboardingViewController.swift */; };
+		35C8F4142C87232B00123A91 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4132C87232B00123A91 /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		35C8F3DB2C85DC6700123A91 /* ProfileTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewHeader.swift; sourceTree = "<group>"; };
 		35C8F3DD2C870C7900123A91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		35C8F4102C87115900123A91 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		35C8F4132C87232B00123A91 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		35C8F3C72C85B41000123A91 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				35C8F4122C87232000123A91 /* Register */,
 				35C8F40F2C87113E00123A91 /* Onboarding */,
 				35C8F3D82C85D98700123A91 /* Profile */,
 				35C8F3D52C85BBFE00123A91 /* TweetCell */,
@@ -183,6 +186,14 @@
 				35C8F4102C87115900123A91 /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		35C8F4122C87232000123A91 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				35C8F4132C87232B00123A91 /* RegisterViewController.swift */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +282,7 @@
 				35C8F3CD2C85B53B00123A91 /* SearchViewController.swift in Sources */,
 				35C8F3B72C85B16000123A91 /* MainTabBarViewController.swift in Sources */,
 				35C8F3B32C85B16000123A91 /* AppDelegate.swift in Sources */,
+				35C8F4142C87232B00123A91 /* RegisterViewController.swift in Sources */,
 				35C8F3D02C85B55300123A91 /* NotificationsViewController.swift in Sources */,
 				35C8F3B52C85B16000123A91 /* SceneDelegate.swift in Sources */,
 				35C8F3CA2C85B42000123A91 /* HomeViewController.swift in Sources */,
