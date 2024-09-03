@@ -108,10 +108,55 @@ class ProfileTableViewHeader: UIView {
         return label
     }()
     
+    var tabs: [UIButton] = ["Tweets", "Tweets & Replies", "Media", "Likes"].map { buttonTitle in
+        let button = UIButton(type: .system)
+        button.setTitle(buttonTitle, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        button.tintColor = .label
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }
+    
+    lazy var sectionStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: tabs)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .equalSpacing
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        return stackView
+    }()
+    
+    enum SectionTabs: String {
+        case tweets = "Tweets"
+        case tweetsAndReplies = "Tweets & Replies"
+        case media = "Media"
+        case likes = "Likes"
+        
+        var index: Int {
+            switch self {
+            case .tweets:
+                return 0
+            case .tweetsAndReplies:
+                return 1
+            case .media:
+                return 2
+            case .likes:
+                return 3
+            }
+        }
+    }
+    
+    var selectedTab: Int = 0 {
+        didSet {
+            print(selectedTab)
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
         configureConstraints()
+        configureStackButtons()
     }
     
     required init?(coder: NSCoder) {
@@ -130,6 +175,7 @@ class ProfileTableViewHeader: UIView {
         addSubview(followingLabel)
         addSubview(followersCountLabel)
         addSubview(followersLabel)
+        addSubview(sectionStack)
     }
     
     func configureConstraints() {
@@ -171,6 +217,35 @@ class ProfileTableViewHeader: UIView {
             
             followersLabel.leadingAnchor.constraint(equalTo: followersCountLabel.trailingAnchor, constant: 5),
             followersLabel.topAnchor.constraint(equalTo: followersCountLabel.topAnchor),
+            
+            sectionStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
+            sectionStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25),
+            sectionStack.topAnchor.constraint(equalTo: followersLabel.bottomAnchor, constant: 5),
+            sectionStack.heightAnchor.constraint(equalToConstant: 35)
         ])
+    }
+    
+    @objc func didTapTab(_ sender: UIButton) {
+        guard let label = sender.titleLabel?.text else { return }
+        
+        switch label {
+        case SectionTabs.tweets.rawValue:
+            selectedTab = 0
+        case SectionTabs.tweetsAndReplies.rawValue:
+            selectedTab = 1
+        case SectionTabs.media.rawValue:
+            selectedTab = 2
+        case SectionTabs.likes.rawValue:
+            selectedTab = 3
+        default:
+            selectedTab = 0
+        }
+    }
+    
+    func configureStackButtons() {
+        for (_, button) in sectionStack.arrangedSubviews.enumerated() {
+            guard let button = button as? UIButton else { return }
+            button.addTarget(self, action: #selector(didTapTab(_ :)), for:  .touchUpInside)
+        }
     }
 }
