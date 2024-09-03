@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class RegisterViewController: UIViewController {
 
+    let registerViewModel = RegisterViewModel()
+    var subscriptions: Set<AnyCancellable> = []
+    
     let registerTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -42,6 +46,7 @@ class RegisterViewController: UIViewController {
         register.backgroundColor = UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1)
         register.layer.cornerRadius = 30
         register.layer.masksToBounds = true
+        register.isEnabled = false
         return register
     }()
     
@@ -50,6 +55,7 @@ class RegisterViewController: UIViewController {
         view.backgroundColor = .systemBackground
         addSubviews()
         configureConstraints()
+        bindViews()
     }
     
     func addSubviews() {
@@ -81,5 +87,25 @@ class RegisterViewController: UIViewController {
             registerButton.heightAnchor.constraint(equalToConstant: 60),
             registerButton.widthAnchor.constraint(equalToConstant: 180)
         ])
+    }
+    
+    @objc func didChangeEmail() {
+        registerViewModel.email = emailTextField.text
+        registerViewModel.validateRegistrationForm()
+    }
+    
+    @objc func didChangePassword() {
+        registerViewModel.password = passwordTextField.text
+        registerViewModel.validateRegistrationForm()
+    }
+    
+    func bindViews() {
+        emailTextField.addTarget(self, action: #selector(didChangeEmail), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(didChangePassword), for: .editingChanged)
+        registerViewModel.$isRegistrationFormValid.sink { [weak self] validationState in
+            guard let self = self else { return }
+            self.registerButton.isEnabled = validationState
+        }
+        .store(in: &subscriptions)
     }
 }
