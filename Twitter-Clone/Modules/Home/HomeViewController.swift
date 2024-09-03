@@ -36,6 +36,11 @@ class HomeViewController: UIViewController {
         timelineTableView.frame = view.frame
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     func configureNavigationBar() {
         let size: CGFloat = 36
         let logoImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: size, height: size))

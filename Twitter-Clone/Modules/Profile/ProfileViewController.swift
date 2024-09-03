@@ -16,6 +16,16 @@ class ProfileViewController: UIViewController {
         return profileTableView
     }()
     
+    let statusBar: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.opacity = 0
+        return view
+    }()
+    
+    var isStatusBarHidden: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -24,15 +34,18 @@ class ProfileViewController: UIViewController {
         setupProfileTableView()
         configureConstraints()
         configureProfileHeader()
+        navigationController?.navigationBar.isHidden = true
     }
     
     func addSubviews() {
         view.addSubview(profileTableView)
+        view.addSubview(statusBar)
     }
     
     func setupProfileTableView() {
         profileTableView.dataSource = self
         profileTableView.delegate = self
+        profileTableView.contentInsetAdjustmentBehavior = .never
     }
     
     func configureConstraints() {
@@ -41,6 +54,11 @@ class ProfileViewController: UIViewController {
             profileTableView.topAnchor.constraint(equalTo: view.topAnchor),
             profileTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             profileTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            statusBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            statusBar.topAnchor.constraint(equalTo: view.topAnchor),
+            statusBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            statusBar.heightAnchor.constraint(equalToConstant: view.bounds.height > 800 ? 40 : 20)
         ])
     }
     
@@ -59,5 +77,24 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier, for: indexPath) as! TweetTableViewCell
         
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yPosition = scrollView.contentOffset.y
+        
+        if yPosition > 150 && isStatusBarHidden {
+            isStatusBarHidden = false
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear) { [weak self] in
+                guard let self = self else { return }
+                self.statusBar.layer.opacity = 1
+            } completion: { _ in }
+                
+        }else if yPosition < 0 && !isStatusBarHidden {
+            isStatusBarHidden = true
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear) { [weak self] in
+                guard let self = self else { return }
+                self.statusBar.layer.opacity = 0
+            } completion: { _ in }
+        }
     }
 }
