@@ -148,9 +148,31 @@ class ProfileTableViewHeader: UIView {
     
     var selectedTab: Int = 0 {
         didSet {
-            print(selectedTab)
+            for i in 0..<tabs.count {
+                tabs[i].tintColor = .secondaryLabel
+                UIView.animate(withDuration: 0.3, delay: 0) { [weak self] in
+                    guard let self = self else { return }
+                    self.leadingAnchors[i].isActive = i == selectedTab ? true : false
+                    self.trailingAnchors[i].isActive = i == selectedTab ? true : false
+                    self.layoutIfNeeded()
+                }
+            }
+            UIView.animate(withDuration: 0.3, delay: 0) { [weak self] in
+                guard let self = self else { return }
+                self.tabs[self.selectedTab].tintColor = .label
+            }
         }
     }
+    
+    let indicator: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1)
+        return view
+    }()
+    
+    var leadingAnchors: [NSLayoutConstraint] = []
+    var trailingAnchors: [NSLayoutConstraint] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -176,6 +198,7 @@ class ProfileTableViewHeader: UIView {
         addSubview(followersCountLabel)
         addSubview(followersLabel)
         addSubview(sectionStack)
+        addSubview(indicator)
     }
     
     func configureConstraints() {
@@ -223,6 +246,20 @@ class ProfileTableViewHeader: UIView {
             sectionStack.topAnchor.constraint(equalTo: followersLabel.bottomAnchor, constant: 5),
             sectionStack.heightAnchor.constraint(equalToConstant: 35)
         ])
+        
+        for i in 0..<tabs.count {
+            let leadingAnchor = indicator.leadingAnchor.constraint(equalTo: sectionStack.arrangedSubviews[i].leadingAnchor)
+            leadingAnchors.append(leadingAnchor)
+            let trailingAnchor = indicator.trailingAnchor.constraint(equalTo: sectionStack.arrangedSubviews[i].trailingAnchor)
+            trailingAnchors.append(trailingAnchor)
+        }
+        
+        NSLayoutConstraint.activate([
+            leadingAnchors[0],
+            trailingAnchors[0],
+            indicator.topAnchor.constraint(equalTo: sectionStack.arrangedSubviews[0].bottomAnchor),
+            indicator.heightAnchor.constraint(equalToConstant: 4)
+        ])
     }
     
     @objc func didTapTab(_ sender: UIButton) {
@@ -247,5 +284,6 @@ class ProfileTableViewHeader: UIView {
             guard let button = button as? UIButton else { return }
             button.addTarget(self, action: #selector(didTapTab(_ :)), for:  .touchUpInside)
         }
+        selectedTab = 0
     }
 }
