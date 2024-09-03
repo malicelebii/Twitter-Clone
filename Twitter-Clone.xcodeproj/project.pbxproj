@@ -29,6 +29,7 @@
 		35C8F40B2C870D8100123A91 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 35C8F40A2C870D8100123A91 /* FirebaseStorageCombine-Community */; };
 		35C8F4112C87115900123A91 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4102C87115900123A91 /* OnboardingViewController.swift */; };
 		35C8F4142C87232B00123A91 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4132C87232B00123A91 /* RegisterViewController.swift */; };
+		35C8F4162C8734D900123A91 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4152C8734D900123A91 /* RegisterViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		35C8F3DD2C870C7900123A91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		35C8F4102C87115900123A91 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		35C8F4132C87232B00123A91 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		35C8F4152C8734D900123A91 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				35C8F4132C87232B00123A91 /* RegisterViewController.swift */,
+				35C8F4152C8734D900123A91 /* RegisterViewModel.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				35C8F3B52C85B16000123A91 /* SceneDelegate.swift in Sources */,
 				35C8F3CA2C85B42000123A91 /* HomeViewController.swift in Sources */,
 				35C8F3DA2C85D99E00123A91 /* ProfileViewController.swift in Sources */,
+				35C8F4162C8734D900123A91 /* RegisterViewModel.swift in Sources */,
 				35C8F3D32C85B56800123A91 /* DirectMessagesViewController.swift in Sources */,
 				35C8F3DC2C85DC6700123A91 /* ProfileTableViewHeader.swift in Sources */,
 				35C8F4112C87115900123A91 /* OnboardingViewController.swift in Sources */,
