@@ -19,6 +19,15 @@
 		35C8F3D72C85BC1300123A91 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F3D62C85BC1300123A91 /* TweetTableViewCell.swift */; };
 		35C8F3DA2C85D99E00123A91 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F3D92C85D99E00123A91 /* ProfileViewController.swift */; };
 		35C8F3DC2C85DC6700123A91 /* ProfileTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F3DB2C85DC6700123A91 /* ProfileTableViewHeader.swift */; };
+		35C8F3DE2C870C7900123A91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35C8F3DD2C870C7900123A91 /* GoogleService-Info.plist */; };
+		35C8F3EB2C870D8100123A91 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 35C8F3EA2C870D8100123A91 /* FirebaseAuth */; };
+		35C8F3ED2C870D8100123A91 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 35C8F3EC2C870D8100123A91 /* FirebaseAuthCombine-Community */; };
+		35C8F3F12C870D8100123A91 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 35C8F3F02C870D8100123A91 /* FirebaseDatabase */; };
+		35C8F3F52C870D8100123A91 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 35C8F3F42C870D8100123A91 /* FirebaseFirestore */; };
+		35C8F3F72C870D8100123A91 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 35C8F3F62C870D8100123A91 /* FirebaseFirestoreCombine-Community */; };
+		35C8F4092C870D8100123A91 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 35C8F4082C870D8100123A91 /* FirebaseStorage */; };
+		35C8F40B2C870D8100123A91 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 35C8F40A2C870D8100123A91 /* FirebaseStorageCombine-Community */; };
+		35C8F4112C87115900123A91 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4102C87115900123A91 /* OnboardingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +45,8 @@
 		35C8F3D62C85BC1300123A91 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		35C8F3D92C85D99E00123A91 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		35C8F3DB2C85DC6700123A91 /* ProfileTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewHeader.swift; sourceTree = "<group>"; };
+		35C8F3DD2C870C7900123A91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		35C8F4102C87115900123A91 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +100,7 @@
 		35C8F3C72C85B41000123A91 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				35C8F40F2C87113E00123A91 /* Onboarding */,
 				35C8F3D82C85D98700123A91 /* Profile */,
 				35C8F3D52C85BBFE00123A91 /* TweetCell */,
 				35C8F3D42C85B82800123A91 /* MainTabBar */,
@@ -155,6 +167,14 @@
 				35C8F3DB2C85DC6700123A91 /* ProfileTableViewHeader.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		35C8F40F2C87113E00123A91 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				35C8F4102C87115900123A91 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +256,7 @@
 				35C8F3DA2C85D99E00123A91 /* ProfileViewController.swift in Sources */,
 				35C8F3D32C85B56800123A91 /* DirectMessagesViewController.swift in Sources */,
 				35C8F3DC2C85DC6700123A91 /* ProfileTableViewHeader.swift in Sources */,
+				35C8F4112C87115900123A91 /* OnboardingViewController.swift in Sources */,
 				35C8F3D72C85BC1300123A91 /* TweetTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
