@@ -72,6 +72,42 @@ class ProfileTableViewHeader: UIView {
         return label
     }()
     
+    let followingCountLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "315"
+        label.textColor = .label
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        return label
+    }()
+    
+    let followingLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Following"
+        label.textColor = .secondaryLabel
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        return label
+    }()
+    
+    let followersCountLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "555"
+        label.textColor = .label
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        return label
+    }()
+    
+    let followersLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Followers"
+        label.textColor = .secondaryLabel
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
@@ -90,6 +126,10 @@ class ProfileTableViewHeader: UIView {
         addSubview(userBioLabel)
         addSubview(joinDateImageView)
         addSubview(joinDateLabel)
+        addSubview(followingCountLabel)
+        addSubview(followingLabel)
+        addSubview(followersCountLabel)
+        addSubview(followersLabel)
     }
     
     func configureConstraints() {
@@ -119,6 +159,18 @@ class ProfileTableViewHeader: UIView {
             
             joinDateLabel.leadingAnchor.constraint(equalTo: joinDateImageView.trailingAnchor, constant: 5),
             joinDateLabel.topAnchor.constraint(equalTo: joinDateImageView.topAnchor),
+            
+            followingCountLabel.leadingAnchor.constraint(equalTo: joinDateImageView.leadingAnchor),
+            followingCountLabel.topAnchor.constraint(equalTo: joinDateImageView.bottomAnchor, constant: 10),
+            
+            followingLabel.leadingAnchor.constraint(equalTo: followingCountLabel.trailingAnchor, constant: 5),
+            followingLabel.topAnchor.constraint(equalTo: followingCountLabel.topAnchor),
+            
+            followersCountLabel.leadingAnchor.constraint(equalTo: followingLabel.trailingAnchor, constant: 30),
+            followersCountLabel.topAnchor.constraint(equalTo: followingLabel.topAnchor),
+            
+            followersLabel.leadingAnchor.constraint(equalTo: followersCountLabel.trailingAnchor, constant: 5),
+            followersLabel.topAnchor.constraint(equalTo: followersCountLabel.topAnchor),
         ])
     }
 }
