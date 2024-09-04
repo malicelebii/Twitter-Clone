@@ -7,7 +7,13 @@
 
 import Foundation
 
-final class RegisterViewModel: ObservableObject {
+protocol RegisterViewModelDelegate {
+    func validateRegistrationForm()
+    func isValidEmail(_ email: String) -> Bool
+    func createUser()
+}
+
+final class RegisterViewModel: ObservableObject, RegisterViewModelDelegate {
     @Published var email: String?
     @Published var password: String?
     @Published var isRegistrationFormValid: Bool = false
