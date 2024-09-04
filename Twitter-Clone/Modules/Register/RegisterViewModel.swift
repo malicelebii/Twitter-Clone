@@ -17,6 +17,11 @@ final class RegisterViewModel: ObservableObject, RegisterViewModelDelegate {
     @Published var email: String?
     @Published var password: String?
     @Published var isRegistrationFormValid: Bool = false
+    let authManager: AuthManagerDelegate
+    
+    init(authManager: AuthManagerDelegate = AuthManager.shared) {
+        self.authManager = authManager
+    }
     
     func validateRegistrationForm() {
         guard let email = email, let password = password else { return }
