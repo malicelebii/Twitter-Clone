@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import FirebaseAuth
+import Combine
 
 protocol RegisterViewModelDelegate {
     func validateRegistrationForm()
@@ -17,6 +19,8 @@ final class RegisterViewModel: ObservableObject, RegisterViewModelDelegate {
     @Published var email: String?
     @Published var password: String?
     @Published var isRegistrationFormValid: Bool = false
+    @Published var user: User?
+    var subscriptions: Set<AnyCancellable> = []
     let authManager: AuthManagerDelegate
     
     init(authManager: AuthManagerDelegate = AuthManager.shared) {
