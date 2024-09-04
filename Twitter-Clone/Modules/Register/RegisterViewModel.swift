@@ -37,4 +37,15 @@ final class RegisterViewModel: ObservableObject, RegisterViewModelDelegate {
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
+    
+    func createUser() {
+        guard let email = email, let password = password else { return }
+        authManager.createUser(email: email, password: password)
+            .sink { _ in
+                
+            } receiveValue: { [weak self] user in
+                self?.user = user
+            }
+            .store(in: &subscriptions)
+    }
 }
