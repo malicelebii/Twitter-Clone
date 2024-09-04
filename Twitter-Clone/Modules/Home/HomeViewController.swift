@@ -57,11 +57,25 @@ class HomeViewController: UIViewController {
         
         let profileImage = UIImage(systemName: "person")
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: profileImage, style: .plain, target: self, action: #selector(didTapProfile))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .plain, target: self, action: #selector(didTapSignOut))
     }
     
     @objc func didTapProfile() {
         let vc = ProfileViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func didTapSignOut() {
+        let alertController = UIAlertController(title: "Sign Out", message: "Are you sure to sign out ?", preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Sign out", style: .destructive, handler: {[weak self] _ in
+            self?.homeViewViewModel.signOut()
+            self?.homeViewViewModel.handleAuthentication {[weak self] vc in
+                self?.present(vc, animated: true)
+            }
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alertController, animated: true)
     }
 }
 
