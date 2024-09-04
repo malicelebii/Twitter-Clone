@@ -12,6 +12,7 @@ import FirebaseAuth
 
 protocol AuthManagerDelegate {
     func createUser(email: String, password: String) -> AnyPublisher<User, Error>
+    func signOut()
 }
 
 final class AuthManager: AuthManagerDelegate {
@@ -21,5 +22,13 @@ final class AuthManager: AuthManagerDelegate {
         return  Auth.auth().createUser(withEmail: email, password: password)
             .map(\.user)
             .eraseToAnyPublisher()
+    }
+    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print(error)
+        }
     }
 }
