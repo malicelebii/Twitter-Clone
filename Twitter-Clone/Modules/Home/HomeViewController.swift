@@ -9,7 +9,8 @@ import UIKit
 import FirebaseAuth
 
 class HomeViewController: UIViewController {
-
+    lazy var homeViewViewModel = HomeViewViewModel()
+    
     let timelineTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(TweetTableViewCell.self, forCellReuseIdentifier: TweetTableViewCell.identifier)
@@ -40,9 +41,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
-        if Auth.auth().currentUser == nil {
-            let vc = UINavigationController(rootViewController: OnboardingViewController())
-            vc.modalPresentationStyle = .fullScreen
+        homeViewViewModel.handleAuthentication { vc in
             present(vc, animated: true)
         }
     }
