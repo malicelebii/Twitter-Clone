@@ -91,7 +91,7 @@ class OnboardingViewController: UIViewController {
     }
     
     @objc func didTapCreateAccount() {
-        let vc = UINavigationController(rootViewController: RegisterViewController())
-        present(vc, animated: true)
+        let vc = RegisterViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
