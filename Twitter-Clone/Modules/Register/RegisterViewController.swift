@@ -56,6 +56,7 @@ class RegisterViewController: UIViewController {
         addSubviews()
         configureConstraints()
         bindViews()
+        registerButton.addTarget(self, action: #selector(didTapRegister), for: .touchUpInside)
     }
     
     func addSubviews() {
@@ -97,6 +98,10 @@ class RegisterViewController: UIViewController {
     @objc func didChangePassword() {
         registerViewModel.password = passwordTextField.text
         registerViewModel.validateRegistrationForm()
+    }
+    
+    @objc func didTapRegister() {
+        registerViewModel.createUser()
     }
     
     func bindViews() {
