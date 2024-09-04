@@ -32,6 +32,7 @@
 		35C8F4162C8734D900123A91 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4152C8734D900123A91 /* RegisterViewModel.swift */; };
 		35C8F41A2C88412B00123A91 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4192C88412B00123A91 /* AuthManager.swift */; };
 		35C8F41C2C8845D500123A91 /* HomeViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F41B2C8845D500123A91 /* HomeViewViewModel.swift */; };
+		35C8F41F2C8852A100123A91 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F41E2C8852A000123A91 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		35C8F4152C8734D900123A91 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		35C8F4192C88412B00123A91 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		35C8F41B2C8845D500123A91 /* HomeViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewViewModel.swift; sourceTree = "<group>"; };
+		35C8F41E2C8852A000123A91 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 		35C8F3C72C85B41000123A91 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				35C8F41D2C88529000123A91 /* Login */,
 				35C8F4172C88411500123A91 /* Network */,
 				35C8F4122C87232000123A91 /* Register */,
 				35C8F40F2C87113E00123A91 /* Onboarding */,
@@ -213,6 +216,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		35C8F41D2C88529000123A91 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				35C8F41E2C8852A000123A91 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -308,6 +319,7 @@
 				35C8F4162C8734D900123A91 /* RegisterViewModel.swift in Sources */,
 				35C8F41C2C8845D500123A91 /* HomeViewViewModel.swift in Sources */,
 				35C8F3D32C85B56800123A91 /* DirectMessagesViewController.swift in Sources */,
+				35C8F41F2C8852A100123A91 /* LoginViewController.swift in Sources */,
 				35C8F3DC2C85DC6700123A91 /* ProfileTableViewHeader.swift in Sources */,
 				35C8F4112C87115900123A91 /* OnboardingViewController.swift in Sources */,
 				35C8F3D72C85BC1300123A91 /* TweetTableViewCell.swift in Sources */,
