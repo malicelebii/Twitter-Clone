@@ -112,5 +112,9 @@ class RegisterViewController: UIViewController {
             self.registerButton.isEnabled = validationState
         }
         .store(in: &subscriptions)
+        
+        registerViewModel.$user.sink {[weak self] user in
+            print(user)
+        } .store(in: &subscriptions)
     }
 }
