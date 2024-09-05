@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class LoginViewController: UIViewController {
+    let authenticationViewModel = AuthenticationViewModel()
+    var subscriptions: Set<AnyCancellable> = []
+
     let loginTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +54,7 @@ class LoginViewController: UIViewController {
         view.backgroundColor = .systemBackground
         addSubviews()
         configureConstraints()
+        bindViews()
         loginButton.addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
     }
     
@@ -84,7 +89,45 @@ class LoginViewController: UIViewController {
         ])
     }
     
+    @objc func didChangeEmail() {
+        authenticationViewModel.email = emailTextField.text
+        authenticationViewModel.validateRegistrationForm()
+    }
+    
+    @objc func didChangePassword() {
+        authenticationViewModel.password = passwordTextField.text
+        authenticationViewModel.validateRegistrationForm()
+    }
+    
+    @objc func didTapRegister() {
+        authenticationViewModel.createUser()
+    }
+    
+    func bindViews() {
+        emailTextField.addTarget(self, action: #selector(didChangeEmail), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(didChangePassword), for: .editingChanged)
+        authenticationViewModel.$isAuthenticationFormValid.sink { [weak self] validationState in
+            guard let self = self else { return }
+            self.loginButton.isEnabled = validationState
+        }
+        .store(in: &subscriptions)
+        
+        authenticationViewModel.$user.sink {[weak self] user in
+            guard user != nil else { return }
+            guard let vc = self?.navigationController?.viewControllers.first as? OnboardingViewController else { return }
+            vc.dismiss(animated: true)
+        } .store(in: &subscriptions)
+        
+        authenticationViewModel.$error.sink { [weak self] errorString in
+            guard let error = errorString else { return }
+            let ac = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self?.present(ac, animated: true)
+        }
+        .store(in: &subscriptions)
+    }
+    
     @objc func didTapLogin() {
-        printContent("login")
+        authenticationViewModel.login()
     }
 }
