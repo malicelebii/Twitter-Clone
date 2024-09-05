@@ -13,6 +13,7 @@ protocol AuthenticationViewModelDelegate {
     func validateRegistrationForm()
     func isValidEmail(_ email: String) -> Bool
     func createUser()
+    func login()
 }
 
 final class AuthenticationViewModel: ObservableObject, AuthenticationViewModelDelegate {
@@ -20,6 +21,8 @@ final class AuthenticationViewModel: ObservableObject, AuthenticationViewModelDe
     @Published var password: String?
     @Published var isAuthenticationFormValid: Bool = false
     @Published var user: User?
+    @Published var error: String?
+    
     var subscriptions: Set<AnyCancellable> = []
     let authManager: AuthManagerDelegate
     
@@ -44,6 +47,22 @@ final class AuthenticationViewModel: ObservableObject, AuthenticationViewModelDe
             .sink { _ in
                 
             } receiveValue: { [weak self] user in
+                self?.user = user
+            }
+            .store(in: &subscriptions)
+    }
+    
+    func login() {
+        guard let email = email, let password = password else { return }
+        authManager.login(email: email, password: password)
+            .sink {[weak self] completion in
+                switch completion {
+                case .failure(let error):
+                    self?.error = error.localizedDescription
+                case .finished:
+                    break
+                }
+            } receiveValue: {[weak self] user in
                 self?.user = user
             }
             .store(in: &subscriptions)
