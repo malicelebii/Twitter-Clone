@@ -13,6 +13,7 @@ import FirebaseAuth
 protocol AuthManagerDelegate {
     func createUser(email: String, password: String) -> AnyPublisher<User, Error>
     func signOut()
+    func login(email: String, password: String) -> AnyPublisher<User, Error>
 }
 
 final class AuthManager: AuthManagerDelegate {
@@ -20,6 +21,12 @@ final class AuthManager: AuthManagerDelegate {
     
     func createUser(email: String, password: String) -> AnyPublisher<FirebaseAuth.User, Error> {
         return  Auth.auth().createUser(withEmail: email, password: password)
+            .map(\.user)
+            .eraseToAnyPublisher()
+    }
+    
+    func login(email: String, password: String) -> AnyPublisher<User, Error> {
+        return Auth.auth().signIn(withEmail: email, password: password)
             .map(\.user)
             .eraseToAnyPublisher()
     }
