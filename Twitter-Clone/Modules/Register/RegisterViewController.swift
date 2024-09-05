@@ -10,7 +10,7 @@ import Combine
 
 class RegisterViewController: UIViewController {
 
-    let registerViewModel = RegisterViewModel()
+    let authenticationViewModel = AuthenticationViewModel()
     var subscriptions: Set<AnyCancellable> = []
     
     let registerTitleLabel: UILabel = {
@@ -91,29 +91,29 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func didChangeEmail() {
-        registerViewModel.email = emailTextField.text
-        registerViewModel.validateRegistrationForm()
+        authenticationViewModel.email = emailTextField.text
+        authenticationViewModel.validateRegistrationForm()
     }
     
     @objc func didChangePassword() {
-        registerViewModel.password = passwordTextField.text
-        registerViewModel.validateRegistrationForm()
+        authenticationViewModel.password = passwordTextField.text
+        authenticationViewModel.validateRegistrationForm()
     }
     
     @objc func didTapRegister() {
-        registerViewModel.createUser()
+        authenticationViewModel.createUser()
     }
     
     func bindViews() {
         emailTextField.addTarget(self, action: #selector(didChangeEmail), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(didChangePassword), for: .editingChanged)
-        registerViewModel.$isRegistrationFormValid.sink { [weak self] validationState in
+        authenticationViewModel.$isAuthenticationFormValid.sink { [weak self] validationState in
             guard let self = self else { return }
             self.registerButton.isEnabled = validationState
         }
         .store(in: &subscriptions)
         
-        registerViewModel.$user.sink {[weak self] user in
+        authenticationViewModel.$user.sink {[weak self] user in
             guard user != nil else { return }
             guard let vc = self?.navigationController?.viewControllers.first as? OnboardingViewController else { return }
             vc.dismiss(animated: true)

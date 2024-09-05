@@ -9,16 +9,16 @@ import Foundation
 import FirebaseAuth
 import Combine
 
-protocol RegisterViewModelDelegate {
+protocol AuthenticationViewModelDelegate {
     func validateRegistrationForm()
     func isValidEmail(_ email: String) -> Bool
     func createUser()
 }
 
-final class RegisterViewModel: ObservableObject, RegisterViewModelDelegate {
+final class AuthenticationViewModel: ObservableObject, AuthenticationViewModelDelegate {
     @Published var email: String?
     @Published var password: String?
-    @Published var isRegistrationFormValid: Bool = false
+    @Published var isAuthenticationFormValid: Bool = false
     @Published var user: User?
     var subscriptions: Set<AnyCancellable> = []
     let authManager: AuthManagerDelegate
@@ -29,7 +29,7 @@ final class RegisterViewModel: ObservableObject, RegisterViewModelDelegate {
     
     func validateRegistrationForm() {
         guard let email = email, let password = password else { return }
-        isRegistrationFormValid = isValidEmail(email) && password.count >= 8
+        isAuthenticationFormValid = isValidEmail(email) && password.count >= 8
     }
     
     func isValidEmail(_ email: String) -> Bool {
