@@ -33,6 +33,7 @@
 		35C8F41A2C88412B00123A91 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4192C88412B00123A91 /* AuthManager.swift */; };
 		35C8F41C2C8845D500123A91 /* HomeViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F41B2C8845D500123A91 /* HomeViewViewModel.swift */; };
 		35C8F41F2C8852A100123A91 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F41E2C8852A000123A91 /* LoginViewController.swift */; };
+		35C8F4452C8AD2AC00123A91 /* TwitterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4442C8AD2AC00123A91 /* TwitterUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		35C8F4192C88412B00123A91 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		35C8F41B2C8845D500123A91 /* HomeViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewViewModel.swift; sourceTree = "<group>"; };
 		35C8F41E2C8852A000123A91 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		35C8F4442C8AD2AC00123A91 /* TwitterUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 		35C8F3B12C85B16000123A91 /* Twitter-Clone */ = {
 			isa = PBXGroup;
 			children = (
+				35C8F4432C8AD2A500123A91 /* Models */,
 				35C8F4172C88411500123A91 /* Network */,
 				35C8F3C72C85B41000123A91 /* Modules */,
 				35C8F3C62C85B40200123A91 /* Application */,
@@ -224,6 +227,14 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		35C8F4432C8AD2A500123A91 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				35C8F4442C8AD2AC00123A91 /* TwitterUser.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -314,6 +325,7 @@
 				35C8F4142C87232B00123A91 /* RegisterViewController.swift in Sources */,
 				35C8F3D02C85B55300123A91 /* NotificationsViewController.swift in Sources */,
 				35C8F3B52C85B16000123A91 /* SceneDelegate.swift in Sources */,
+				35C8F4452C8AD2AC00123A91 /* TwitterUser.swift in Sources */,
 				35C8F3CA2C85B42000123A91 /* HomeViewController.swift in Sources */,
 				35C8F3DA2C85D99E00123A91 /* ProfileViewController.swift in Sources */,
 				35C8F4162C8734D900123A91 /* AuthenticationViewModel.swift in Sources */,
