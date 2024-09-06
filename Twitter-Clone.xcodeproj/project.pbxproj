@@ -33,6 +33,7 @@
 		35C8F41A2C88412B00123A91 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4192C88412B00123A91 /* AuthManager.swift */; };
 		35C8F41C2C8845D500123A91 /* HomeViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F41B2C8845D500123A91 /* HomeViewViewModel.swift */; };
 		35C8F41F2C8852A100123A91 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F41E2C8852A000123A91 /* LoginViewController.swift */; };
+		35C8F4422C8AD13F00123A91 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4412C8AD13F00123A91 /* DatabaseManager.swift */; };
 		35C8F4452C8AD2AC00123A91 /* TwitterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4442C8AD2AC00123A91 /* TwitterUser.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		35C8F4192C88412B00123A91 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		35C8F41B2C8845D500123A91 /* HomeViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewViewModel.swift; sourceTree = "<group>"; };
 		35C8F41E2C8852A000123A91 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		35C8F4412C8AD13F00123A91 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		35C8F4442C8AD2AC00123A91 /* TwitterUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				35C8F4192C88412B00123A91 /* AuthManager.swift */,
+				35C8F4412C8AD13F00123A91 /* DatabaseManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				35C8F41A2C88412B00123A91 /* AuthManager.swift in Sources */,
 				35C8F3B72C85B16000123A91 /* MainTabBarViewController.swift in Sources */,
 				35C8F3B32C85B16000123A91 /* AppDelegate.swift in Sources */,
+				35C8F4422C8AD13F00123A91 /* DatabaseManager.swift in Sources */,
 				35C8F4142C87232B00123A91 /* RegisterViewController.swift in Sources */,
 				35C8F3D02C85B55300123A91 /* NotificationsViewController.swift in Sources */,
 				35C8F3B52C85B16000123A91 /* SceneDelegate.swift in Sources */,
