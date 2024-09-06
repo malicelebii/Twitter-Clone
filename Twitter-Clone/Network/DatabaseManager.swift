@@ -13,6 +13,7 @@ import Combine
 
 protocol DatabaseManagerDelegate {
     func addUser(with user: User) -> AnyPublisher<Bool, Error>
+    func retrieveUser(with id: String) -> AnyPublisher<TwitterUser, Error>
 }
 
 final class DatabaseManager: DatabaseManagerDelegate {
@@ -26,6 +27,14 @@ final class DatabaseManager: DatabaseManagerDelegate {
         return db.collection(usersPath).document(twitterUser.id).setData(from: twitterUser)
             .map { _ in
                 return true
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func retrieveUser(with id: String) -> AnyPublisher<TwitterUser, Error> {
+        db.collection(usersPath).document(id).getDocument()
+            .tryMap {
+                try $0.data(as: TwitterUser.self)
             }
             .eraseToAnyPublisher()
     }
