@@ -70,9 +70,15 @@ class HomeViewController: UIViewController {
         homeViewViewModel.$user.sink {[weak self] user in
             guard let user = user else { return }
             if !user.isUserOnboarded {
+                self?.completeUserOnbarding()
             }
         }
         .store(in: &subscriptions)
+    }
+    
+    func completeUserOnbarding() {
+        let vc = ProfileDataFormViewController()
+        present(vc, animated: true)
     }
     
     @objc func didTapProfile() {
