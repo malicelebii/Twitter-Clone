@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import Combine
 
 protocol HomeViewViewModelDelegate {
     func handleAuthentication(completion: (UIViewController) -> Void)
@@ -15,9 +16,16 @@ protocol HomeViewViewModelDelegate {
 
 final class HomeViewViewModel: HomeViewViewModelDelegate {
     let authManager: AuthManagerDelegate
+    let databaseManager: DatabaseManagerDelegate
     
-    init(authManager: AuthManagerDelegate = AuthManager.shared) {
+    @Published var user: TwitterUser?
+    @Published var error: String?
+
+    var subscriptions: Set<AnyCancellable> = []
+    
+    init(authManager: AuthManagerDelegate = AuthManager.shared, databaseManager: DatabaseManagerDelegate = DatabaseManager.shared) {
         self.authManager = authManager
+        self.databaseManager = databaseManager
     }
     
     func handleAuthentication(completion: (UIViewController) -> Void) {
@@ -30,5 +38,20 @@ final class HomeViewViewModel: HomeViewViewModelDelegate {
     
     func signOut() {
         authManager.signOut()
+    }
+    
+    func retrieveUser() {
+        guard let id = Auth.auth().getUserID() else { return }
+        
+        databaseManager.retrieveUser(with: id)
+            .sink {[weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error.localizedDescription
+                }
+            } receiveValue: {[weak self] user in
+                self?.user = user
+            }
+            .store(in: &subscriptions)
+
     }
 }
