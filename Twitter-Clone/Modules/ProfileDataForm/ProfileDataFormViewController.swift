@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 class ProfileDataFormViewController: UIViewController {
 
@@ -101,6 +102,10 @@ class ProfileDataFormViewController: UIViewController {
         bioTextView.delegate = self
         displayNameTextField.delegate = self
         usernameTextField.delegate = self
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
+        avatarPlaceholderImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToUpload)))
+    }
+    
     func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(hintLabel)
@@ -146,5 +151,60 @@ class ProfileDataFormViewController: UIViewController {
             submitButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -20),
             submitButton.heightAnchor.constraint(equalToConstant: 50),
         ])
+    }
+    
+    @objc func didTapToDismiss() {
+        view.endEditing(true)
+    }
+    
+    @objc func didTapToUpload() {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+}
+
+extension ProfileDataFormViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        scrollView.setContentOffset(CGPoint(x: 0, y: textView.frame.origin.y - 100), animated: true)
+        textView.text = ""
+        textView.textColor = .label
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Tell the world about yourself"
+            textView.textColor = .gray
+        }
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    }
+}
+
+extension ProfileDataFormViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint(x: 0, y: textField.frame.origin.y - 100), animated: true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    }
+}
+
+extension ProfileDataFormViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        for result in results {
+            result.itemProvider.loadObject(ofClass: UIImage.self) {[weak self] object, _ in
+                if let image = object as? UIImage {
+                    DispatchQueue.main.async {
+                        self?.avatarPlaceholderImageView.contentMode = .scaleAspectFill
+                        self?.avatarPlaceholderImageView.image = image
+                    }
+                }
+            }
+        }
+        picker.dismiss(animated: true)
     }
 }
