@@ -18,11 +18,12 @@ protocol StorageManagerDelegate {
 final class StorageManager: StorageManagerDelegate {
     static let shared = StorageManager()
     
-    let storage = Storage.storage().reference()
+    let storage = Storage.storage()
     
     func uploadProfilePhoto(with randomID: String, image: Data, metaData: StorageMetadata) -> AnyPublisher<StorageMetadata, Error> {
         storage
-            .child("images/\(randomID)/.jpg")
+            .reference()
+            .child("images/\(randomID).jpg")
             .putData(image, metadata: metaData)
             .eraseToAnyPublisher()
     }
