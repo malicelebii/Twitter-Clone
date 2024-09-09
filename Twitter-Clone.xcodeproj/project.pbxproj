@@ -36,6 +36,7 @@
 		35C8F4422C8AD13F00123A91 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4412C8AD13F00123A91 /* DatabaseManager.swift */; };
 		35C8F4452C8AD2AC00123A91 /* TwitterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4442C8AD2AC00123A91 /* TwitterUser.swift */; };
 		35C8F4482C8AE29C00123A91 /* ProfileDataFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4472C8AE29C00123A91 /* ProfileDataFormViewController.swift */; };
+		35C8F4502C8F289900123A91 /* ProfileDataFormViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F44F2C8F289800123A91 /* ProfileDataFormViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		35C8F4412C8AD13F00123A91 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		35C8F4442C8AD2AC00123A91 /* TwitterUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterUser.swift; sourceTree = "<group>"; };
 		35C8F4472C8AE29C00123A91 /* ProfileDataFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataFormViewController.swift; sourceTree = "<group>"; };
+		35C8F44F2C8F289800123A91 /* ProfileDataFormViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataFormViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				35C8F4472C8AE29C00123A91 /* ProfileDataFormViewController.swift */,
+				35C8F44F2C8F289800123A91 /* ProfileDataFormViewViewModel.swift */,
 			);
 			path = ProfileDataForm;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				35C8F4452C8AD2AC00123A91 /* TwitterUser.swift in Sources */,
 				35C8F3CA2C85B42000123A91 /* HomeViewController.swift in Sources */,
 				35C8F3DA2C85D99E00123A91 /* ProfileViewController.swift in Sources */,
+				35C8F4502C8F289900123A91 /* ProfileDataFormViewViewModel.swift in Sources */,
 				35C8F4162C8734D900123A91 /* AuthenticationViewModel.swift in Sources */,
 				35C8F41C2C8845D500123A91 /* HomeViewViewModel.swift in Sources */,
 				35C8F3D32C85B56800123A91 /* DirectMessagesViewController.swift in Sources */,
