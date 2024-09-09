@@ -37,6 +37,7 @@
 		35C8F4452C8AD2AC00123A91 /* TwitterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4442C8AD2AC00123A91 /* TwitterUser.swift */; };
 		35C8F4482C8AE29C00123A91 /* ProfileDataFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4472C8AE29C00123A91 /* ProfileDataFormViewController.swift */; };
 		35C8F4502C8F289900123A91 /* ProfileDataFormViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F44F2C8F289800123A91 /* ProfileDataFormViewViewModel.swift */; };
+		35C8F4522C8F2E8500123A91 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4512C8F2E8500123A91 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		35C8F4442C8AD2AC00123A91 /* TwitterUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterUser.swift; sourceTree = "<group>"; };
 		35C8F4472C8AE29C00123A91 /* ProfileDataFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataFormViewController.swift; sourceTree = "<group>"; };
 		35C8F44F2C8F289800123A91 /* ProfileDataFormViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataFormViewViewModel.swift; sourceTree = "<group>"; };
+		35C8F4512C8F2E8500123A91 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 			children = (
 				35C8F4192C88412B00123A91 /* AuthManager.swift */,
 				35C8F4412C8AD13F00123A91 /* DatabaseManager.swift */,
+				35C8F4512C8F2E8500123A91 /* StorageManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				35C8F3CD2C85B53B00123A91 /* SearchViewController.swift in Sources */,
 				35C8F41A2C88412B00123A91 /* AuthManager.swift in Sources */,
 				35C8F3B72C85B16000123A91 /* MainTabBarViewController.swift in Sources */,
+				35C8F4522C8F2E8500123A91 /* StorageManager.swift in Sources */,
 				35C8F3B32C85B16000123A91 /* AppDelegate.swift in Sources */,
 				35C8F4422C8AD13F00123A91 /* DatabaseManager.swift in Sources */,
 				35C8F4142C87232B00123A91 /* RegisterViewController.swift in Sources */,
