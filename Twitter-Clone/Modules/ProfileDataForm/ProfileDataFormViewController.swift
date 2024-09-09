@@ -108,6 +108,7 @@ class ProfileDataFormViewController: UIViewController {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
         avatarPlaceholderImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToUpload)))
         bindViews()
+        submitButton.addTarget(self, action: #selector(didTapSubmit), for: .touchUpInside)
     }
     
     func addSubviews() {
@@ -187,6 +188,10 @@ class ProfileDataFormViewController: UIViewController {
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
         present(picker, animated: true)
+    }
+    
+    @objc func didTapSubmit() {
+        viewModel.uploadAvatar()
     }
 }
 
