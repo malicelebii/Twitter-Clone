@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class ProfileDataFormViewViewModel: ObservableObject {
+protocol ProfileDataFormViewViewModelDelegate {
+    func validateUserProfileForm()
+    func uploadAvatar()
+}
+
     @Published var displayName: String?
     @Published var username: String?
     @Published var bio: String?
