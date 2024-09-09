@@ -7,9 +7,12 @@
 
 import UIKit
 import PhotosUI
+import Combine
 
 class ProfileDataFormViewController: UIViewController {
-
+    let viewModel = ProfileDataFormViewViewModel()
+    var subscriptions: Set<AnyCancellable> = []
+    
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +84,7 @@ class ProfileDataFormViewController: UIViewController {
     }()
 
     let submitButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Submit", for: .normal)
         button.tintColor = .white
@@ -104,6 +107,7 @@ class ProfileDataFormViewController: UIViewController {
         usernameTextField.delegate = self
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
         avatarPlaceholderImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToUpload)))
+        bindViews()
     }
     
     func addSubviews() {
@@ -153,6 +157,25 @@ class ProfileDataFormViewController: UIViewController {
         ])
     }
     
+    @objc func didChangeDisplayName() {
+        viewModel.displayName = displayNameTextField.text
+        viewModel.validateUserProfileForm()
+    }
+    
+    @objc func didChangeUsername() {
+        viewModel.username = usernameTextField.text
+        viewModel.validateUserProfileForm()
+    }
+    
+    func bindViews() {
+        displayNameTextField.addTarget(self, action: #selector(didChangeDisplayName), for: .editingChanged)
+        usernameTextField.addTarget(self, action: #selector(didChangeUsername), for: .editingChanged)
+        viewModel.$isFormValid.sink {[weak self] buttonState in
+            self?.submitButton.isEnabled = buttonState
+        }
+        .store(in: &subscriptions)
+    }
+    
     @objc func didTapToDismiss() {
         view.endEditing(true)
     }
@@ -181,6 +204,11 @@ extension ProfileDataFormViewController: UITextViewDelegate {
         }
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        viewModel.bio = textView.text
+        viewModel.validateUserProfileForm()
+    }
 }
 
 extension ProfileDataFormViewController: UITextFieldDelegate {
@@ -201,6 +229,8 @@ extension ProfileDataFormViewController: PHPickerViewControllerDelegate {
                     DispatchQueue.main.async {
                         self?.avatarPlaceholderImageView.contentMode = .scaleAspectFill
                         self?.avatarPlaceholderImageView.image = image
+                        self?.viewModel.imageData = image
+                        self?.viewModel.validateUserProfileForm()
                     }
                 }
             }
