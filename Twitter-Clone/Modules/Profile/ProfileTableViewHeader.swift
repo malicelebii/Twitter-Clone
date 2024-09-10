@@ -8,7 +8,7 @@
 import UIKit
 
 class ProfileTableViewHeader: UIView {
-    let profileAvatarImageView: UIImageView = {
+    var profileAvatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(systemName: "person")
@@ -28,7 +28,7 @@ class ProfileTableViewHeader: UIView {
         return imageView
     }()
     
-    let displayNameLabel: UILabel = {
+    var displayNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Mehmet Ali Çelebi"
@@ -37,7 +37,7 @@ class ProfileTableViewHeader: UIView {
         return label
     }()
 
-    let usernameLabel: UILabel = {
+    var usernameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "@malicelebii"
@@ -46,7 +46,7 @@ class ProfileTableViewHeader: UIView {
         return label
     }()
 
-    let userBioLabel: UILabel = {
+    var userBioLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 3
@@ -63,7 +63,7 @@ class ProfileTableViewHeader: UIView {
         return imageView
     }()
     
-    let joinDateLabel: UILabel = {
+    var joinDateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .secondaryLabel
@@ -72,7 +72,7 @@ class ProfileTableViewHeader: UIView {
         return label
     }()
     
-    let followingCountLabel: UILabel = {
+    var followingCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "315"
@@ -90,7 +90,7 @@ class ProfileTableViewHeader: UIView {
         return label
     }()
     
-    let followersCountLabel: UILabel = {
+    var followersCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "555"
