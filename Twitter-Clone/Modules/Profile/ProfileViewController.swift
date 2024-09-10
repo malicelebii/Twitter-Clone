@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import Combine
+import Kingfisher
 
 class ProfileViewController: UIViewController {
-
+    let profileViewViewModel = ProfileViewViewModel()
+    var subscriptions: Set<AnyCancellable> = []
+    
     let profileTableView: UITableView = {
         let profileTableView = UITableView()
         profileTableView.register(TweetTableViewCell.self, forCellReuseIdentifier: TweetTableViewCell.identifier)
@@ -24,6 +28,8 @@ class ProfileViewController: UIViewController {
         return view
     }()
     
+    lazy var headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0, width: profileTableView.frame.width, height: 390))
+    
     var isStatusBarHidden: Bool = true
     
     override func viewDidLoad() {
@@ -35,6 +41,12 @@ class ProfileViewController: UIViewController {
         configureConstraints()
         configureProfileHeader()
         navigationController?.navigationBar.isHidden = true
+        bindViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        profileViewViewModel.retrieveUser()
     }
     
     func addSubviews() {
@@ -63,8 +75,20 @@ class ProfileViewController: UIViewController {
     }
     
     func configureProfileHeader() {
-        let headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0, width: profileTableView.frame.width, height: 390))
         profileTableView.tableHeaderView = headerView
+    }
+    
+    func bindViews() {
+        profileViewViewModel.$user.sink { [weak self] user in
+            guard let user else { return }
+            self?.headerView.displayNameLabel.text = user.displayName
+            self?.headerView.usernameLabel.text = "@" + user.username
+            self?.headerView.followersCountLabel.text = "\(user.followersCount)"
+            self?.headerView.followingCountLabel.text = "\(user.followingCount)"
+            self?.headerView.userBioLabel.text = user.bio
+            self?.headerView.profileAvatarImageView.kf.setImage(with: URL(string: user.avatarPath))
+        }
+        .store(in: &subscriptions)
     }
 }
 
