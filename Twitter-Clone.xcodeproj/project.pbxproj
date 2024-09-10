@@ -38,6 +38,7 @@
 		35C8F4482C8AE29C00123A91 /* ProfileDataFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4472C8AE29C00123A91 /* ProfileDataFormViewController.swift */; };
 		35C8F4502C8F289900123A91 /* ProfileDataFormViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F44F2C8F289800123A91 /* ProfileDataFormViewViewModel.swift */; };
 		35C8F4522C8F2E8500123A91 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4512C8F2E8500123A91 /* StorageManager.swift */; };
+		35C8F4542C9073ED00123A91 /* ProfileViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4532C9073ED00123A91 /* ProfileViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		35C8F4472C8AE29C00123A91 /* ProfileDataFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataFormViewController.swift; sourceTree = "<group>"; };
 		35C8F44F2C8F289800123A91 /* ProfileDataFormViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataFormViewViewModel.swift; sourceTree = "<group>"; };
 		35C8F4512C8F2E8500123A91 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		35C8F4532C9073ED00123A91 /* ProfileViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 			children = (
 				35C8F3D92C85D99E00123A91 /* ProfileViewController.swift */,
 				35C8F3DB2C85DC6700123A91 /* ProfileTableViewHeader.swift */,
+				35C8F4532C9073ED00123A91 /* ProfileViewViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				35C8F3B32C85B16000123A91 /* AppDelegate.swift in Sources */,
 				35C8F4422C8AD13F00123A91 /* DatabaseManager.swift in Sources */,
 				35C8F4142C87232B00123A91 /* RegisterViewController.swift in Sources */,
+				35C8F4542C9073ED00123A91 /* ProfileViewViewModel.swift in Sources */,
 				35C8F3D02C85B55300123A91 /* NotificationsViewController.swift in Sources */,
 				35C8F3B52C85B16000123A91 /* SceneDelegate.swift in Sources */,
 				35C8F4452C8AD2AC00123A91 /* TwitterUser.swift in Sources */,
