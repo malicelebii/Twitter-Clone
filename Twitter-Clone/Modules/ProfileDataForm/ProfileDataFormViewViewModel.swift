@@ -26,9 +26,11 @@ final class ProfileDataFormViewViewModel: ObservableObject, ProfileDataFormViewV
     @Published var error: String?
     
     let storageManager: StorageManagerDelegate
+    let databaseManager: DatabaseManagerDelegate
     
-    init(storageManager: StorageManagerDelegate = StorageManager.shared) {
+    init(storageManager: StorageManagerDelegate = StorageManager.shared, databaseManager: DatabaseManagerDelegate = DatabaseManager.shared) {
         self.storageManager = storageManager
+        self.databaseManager = databaseManager
     }
     
     func validateUserProfileForm() {
