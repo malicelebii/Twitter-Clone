@@ -175,6 +175,13 @@ class ProfileDataFormViewController: UIViewController {
             self?.submitButton.isEnabled = buttonState
         }
         .store(in: &subscriptions)
+        
+        viewModel.$isOnboardingFinished.sink { [weak self] (success: Bool) in
+            if success {
+                self?.dismiss(animated: true)
+            }
+        }
+        .store(in: &subscriptions)
     }
     
     @objc func didTapToDismiss() {
