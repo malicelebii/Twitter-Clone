@@ -41,6 +41,7 @@
 		35C8F4542C9073ED00123A91 /* ProfileViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4532C9073ED00123A91 /* ProfileViewViewModel.swift */; };
 		35C8F4572C907B6D00123A91 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 35C8F4562C907B6D00123A91 /* Kingfisher */; };
 		35C8F45A2C91CD9400123A91 /* TweetComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4592C91CD9400123A91 /* TweetComposeViewController.swift */; };
+		35C8F45C2C91D3DD00123A91 /* TweetComposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F45B2C91D3DD00123A91 /* TweetComposeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		35C8F4512C8F2E8500123A91 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		35C8F4532C9073ED00123A91 /* ProfileViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewViewModel.swift; sourceTree = "<group>"; };
 		35C8F4592C91CD9400123A91 /* TweetComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetComposeViewController.swift; sourceTree = "<group>"; };
+		35C8F45B2C91D3DD00123A91 /* TweetComposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetComposeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				35C8F4592C91CD9400123A91 /* TweetComposeViewController.swift */,
+				35C8F45B2C91D3DD00123A91 /* TweetComposeViewModel.swift */,
 			);
 			path = TweetCompose;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				35C8F4502C8F289900123A91 /* ProfileDataFormViewViewModel.swift in Sources */,
 				35C8F4162C8734D900123A91 /* AuthenticationViewModel.swift in Sources */,
 				35C8F41C2C8845D500123A91 /* HomeViewViewModel.swift in Sources */,
+				35C8F45C2C91D3DD00123A91 /* TweetComposeViewModel.swift in Sources */,
 				35C8F3D32C85B56800123A91 /* DirectMessagesViewController.swift in Sources */,
 				35C8F4482C8AE29C00123A91 /* ProfileDataFormViewController.swift in Sources */,
 				35C8F41F2C8852A100123A91 /* LoginViewController.swift in Sources */,
