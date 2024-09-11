@@ -12,7 +12,18 @@ import Combine
 class HomeViewController: UIViewController {
     lazy var homeViewViewModel = HomeViewViewModel()
     private var subscriptions: Set<AnyCancellable> = []
-    
+
+    let composeTweetButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1)
+        button.tintColor = .white
+        button.layer.cornerRadius = 30
+        button.clipsToBounds = true
+        let plusSign = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .bold))
+        button.setImage(plusSign, for: .normal)
+        return button
+    }()
     
     let timelineTableView: UITableView = {
         let tableView = UITableView()
@@ -26,10 +37,13 @@ class HomeViewController: UIViewController {
         setupTimeLineTableView()
         configureNavigationBar()
         bindViews()
+        configureConstraints()
+        composeTweetButton.addTarget(self, action: #selector(didTapComposeTweetButton(_:)), for: .touchUpInside)
     }
     
     func addSubViews() {
         view.addSubview(timelineTableView)
+        view.addSubview(composeTweetButton)
     }
     
     func setupTimeLineTableView() {
@@ -66,6 +80,15 @@ class HomeViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .plain, target: self, action: #selector(didTapSignOut))
     }
     
+    func configureConstraints() {
+        NSLayoutConstraint.activate([
+            composeTweetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            composeTweetButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -125),
+            composeTweetButton.heightAnchor.constraint(equalToConstant: 60),
+            composeTweetButton.widthAnchor.constraint(equalToConstant: 60),
+        ])
+    }
+    
     func bindViews() {
         homeViewViewModel.$user.sink {[weak self] user in
             guard let user = user else { return }
@@ -96,6 +119,12 @@ class HomeViewController: UIViewController {
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alertController, animated: true)
+    }
+    
+    @objc func didTapComposeTweetButton(_ sender: UIButton) {
+        let vc = UINavigationController(rootViewController: TweetComposeViewController())
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 
