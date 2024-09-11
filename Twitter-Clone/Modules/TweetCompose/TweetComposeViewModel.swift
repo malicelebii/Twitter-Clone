@@ -18,6 +18,7 @@ final class TweetComposeViewModel: ObservableObject, TweetComposeViewModelDelega
     let databaseManager: DatabaseManagerDelegate
     var subscriptions: Set<AnyCancellable> = []
     @Published var isValidToTweet: Bool = false
+    @Published var shouldDismissComposer: Bool = false
     @Published var error: String?
     @Published var user: TwitterUser?
     var tweetContent: String = ""
