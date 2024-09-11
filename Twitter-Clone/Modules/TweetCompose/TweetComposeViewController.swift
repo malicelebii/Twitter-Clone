@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class TweetComposeViewController: UIViewController {
-
+    let tweetComposeViewModel = TweetComposeViewModel()
+    var subscriptions: Set<AnyCancellable> = []
+    
     let tweetButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -45,6 +48,28 @@ class TweetComposeViewController: UIViewController {
         addSubviews()
         configureConstraints()
         tweetButton.addTarget(self, action: #selector(didTapTweet), for: .touchUpInside)
+        bindViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+          super.viewWillAppear(animated)
+          tweetComposeViewModel.getUserData()
+      }
+    
+    func bindViews() {
+        tweetComposeViewModel.$isValidToTweet.sink {[weak self] valid in
+            self?.tweetButton.isEnabled = valid
+        }
+        .store(in: &subscriptions)
+        
+        tweetComposeViewModel.$shouldDismissComposer.sink {[weak self] success in
+            if success {
+                self?.dismissCompose()
+            }
+        }
+        .store(in: &subscriptions)
+        
+        
     }
     
     func configureNavigationBar() {
@@ -76,7 +101,7 @@ class TweetComposeViewController: UIViewController {
     }
     
     @objc func didTapTweet() {
-        
+        tweetComposeViewModel.sendTweet()
     }
 }
 
