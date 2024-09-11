@@ -27,12 +27,17 @@ class TweetComposeViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
+        configureNavigationBar()
         addSubviews()
         configureConstraints()
         tweetButton.addTarget(self, action: #selector(didTapTweet), for: .touchUpInside)
     }
     
+    func configureNavigationBar() {
         title = "Tweet Compose"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissCompose))
+    }
+    
     func addSubviews() {
         view.addSubview(tweetButton)
     }
@@ -43,6 +48,9 @@ class TweetComposeViewController: UIViewController {
             tweetButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -10),
             tweetButton.widthAnchor.constraint(equalToConstant: 120),
             tweetButton.heightAnchor.constraint(equalToConstant: 40),
+    @objc func dismissCompose() {
+        dismiss(animated: true)
+    }
     
     @objc func didTapTweet() {
         
