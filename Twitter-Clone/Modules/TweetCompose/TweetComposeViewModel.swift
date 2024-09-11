@@ -12,6 +12,7 @@ import Combine
 protocol TweetComposeViewModelDelegate {
     func getUserData()
     func validateTweetContent()
+    func sendTweet()
 }
 
 final class TweetComposeViewModel: ObservableObject, TweetComposeViewModelDelegate {
@@ -42,5 +43,20 @@ final class TweetComposeViewModel: ObservableObject, TweetComposeViewModelDelega
     
     func validateTweetContent() {
         isValidToTweet = !tweetContent.isEmpty
+    }
+    
+    func sendTweet() {
+        guard let userID = user?.id, let user else { return }
+        let tweet = Tweet(author: user, authorID: userID, tweetContent: tweetContent, likesCount: 0, likers: [], isReply: false, parentReference: nil)
+        databaseManager.sendTweet(tweet: tweet)
+            .sink {[weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error.localizedDescription
+                }
+            } receiveValue: {[weak self] state in
+                self?.shouldDismissComposer = state
+            }
+            .store(in: &subscriptions)
+
     }
 }
