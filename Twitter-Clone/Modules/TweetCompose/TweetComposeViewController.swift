@@ -23,10 +23,24 @@ class TweetComposeViewController: UIViewController {
         button.isEnabled = false
         return button
     }()
+    
+    let tweetContentTextView: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.layer.masksToBounds = true
+        textView.layer.cornerRadius = 8
+        textView.textContainerInset = .init(top: 15, left: 15, bottom: 15, right: 15)
+        textView.text = "What's happening?"
+        textView.textColor = .gray
+        textView.font = .systemFont(ofSize: 16)
+        return textView
+    }()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .systemBackground
+        tweetContentTextView.delegate = self
         configureNavigationBar()
         addSubviews()
         configureConstraints()
@@ -40,6 +54,7 @@ class TweetComposeViewController: UIViewController {
     
     func addSubviews() {
         view.addSubview(tweetButton)
+        view.addSubview(tweetContentTextView)
     }
     
     func configureConstraints() {
@@ -48,6 +63,14 @@ class TweetComposeViewController: UIViewController {
             tweetButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -10),
             tweetButton.widthAnchor.constraint(equalToConstant: 120),
             tweetButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            tweetContentTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tweetContentTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            tweetContentTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            tweetContentTextView.bottomAnchor.constraint(equalTo: tweetButton.topAnchor, constant: -10)
+        ])
+    }
+    
     @objc func dismissCompose() {
         dismiss(animated: true)
     }
@@ -58,7 +81,22 @@ class TweetComposeViewController: UIViewController {
 }
 
 
+extension TweetComposeViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .gray {
+            textView.textColor = .label
+            textView.text = ""
+        }
     }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "What's happening?"
+            textView.textColor = .gray
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+
     }
 }
