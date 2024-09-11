@@ -11,13 +11,16 @@ import Combine
 
 protocol TweetComposeViewModelDelegate {
     func getUserData()
+    func validateTweetContent()
 }
 
 final class TweetComposeViewModel: ObservableObject, TweetComposeViewModelDelegate {
     let databaseManager: DatabaseManagerDelegate
     var subscriptions: Set<AnyCancellable> = []
+    @Published var isValidToTweet: Bool = false
     @Published var error: String?
     @Published var user: TwitterUser?
+    var tweetContent: String = ""
     
     init(databaseManager: DatabaseManagerDelegate = DatabaseManager.shared) {
         self.databaseManager = databaseManager
@@ -35,4 +38,8 @@ final class TweetComposeViewModel: ObservableObject, TweetComposeViewModelDelega
              }
              .store(in: &subscriptions)
      }
+    
+    func validateTweetContent() {
+        isValidToTweet = !tweetContent.isEmpty
+    }
 }
