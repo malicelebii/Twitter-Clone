@@ -97,6 +97,7 @@ extension TweetComposeViewController: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-
+        tweetComposeViewModel.tweetContent = textView.text
+        tweetComposeViewModel.validateTweetContent()
     }
 }
