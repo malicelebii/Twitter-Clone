@@ -42,6 +42,7 @@
 		35C8F4572C907B6D00123A91 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 35C8F4562C907B6D00123A91 /* Kingfisher */; };
 		35C8F45A2C91CD9400123A91 /* TweetComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4592C91CD9400123A91 /* TweetComposeViewController.swift */; };
 		35C8F45C2C91D3DD00123A91 /* TweetComposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F45B2C91D3DD00123A91 /* TweetComposeViewModel.swift */; };
+		35C8F45E2C91D5EE00123A91 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F45D2C91D5EE00123A91 /* Tweet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		35C8F4532C9073ED00123A91 /* ProfileViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewViewModel.swift; sourceTree = "<group>"; };
 		35C8F4592C91CD9400123A91 /* TweetComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetComposeViewController.swift; sourceTree = "<group>"; };
 		35C8F45B2C91D3DD00123A91 /* TweetComposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetComposeViewModel.swift; sourceTree = "<group>"; };
+		35C8F45D2C91D5EE00123A91 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				35C8F4442C8AD2AC00123A91 /* TwitterUser.swift */,
+				35C8F45D2C91D5EE00123A91 /* Tweet.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				35C8F4542C9073ED00123A91 /* ProfileViewViewModel.swift in Sources */,
 				35C8F3D02C85B55300123A91 /* NotificationsViewController.swift in Sources */,
 				35C8F3B52C85B16000123A91 /* SceneDelegate.swift in Sources */,
+				35C8F45E2C91D5EE00123A91 /* Tweet.swift in Sources */,
 				35C8F4452C8AD2AC00123A91 /* TwitterUser.swift in Sources */,
 				35C8F3CA2C85B42000123A91 /* HomeViewController.swift in Sources */,
 				35C8F3DA2C85D99E00123A91 /* ProfileViewController.swift in Sources */,
