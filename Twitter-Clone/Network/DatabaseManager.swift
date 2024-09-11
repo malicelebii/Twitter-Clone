@@ -15,6 +15,7 @@ protocol DatabaseManagerDelegate {
     func addUser(with user: User) -> AnyPublisher<Bool, Error>
     func retrieveUser(with id: String) -> AnyPublisher<TwitterUser, Error>
     func updateUserFields(fields: [String: Any], for id: String) -> AnyPublisher<Bool, Error>
+    func sendTweet(tweet: Tweet) -> AnyPublisher<Bool, Error>
 }
 
 final class DatabaseManager: DatabaseManagerDelegate {
@@ -22,6 +23,7 @@ final class DatabaseManager: DatabaseManagerDelegate {
     
     let db = Firestore.firestore()
     let usersPath: String = "users"
+    let tweetsPath: String = "tweets"
     
     func addUser(with user: User) -> AnyPublisher<Bool, Error> {
         let twitterUser = TwitterUser(from: user)
@@ -43,6 +45,12 @@ final class DatabaseManager: DatabaseManagerDelegate {
     func updateUserFields(fields: [String : Any], for id: String) -> AnyPublisher<Bool, Error> {
         db.collection(usersPath).document(id).updateData(fields)
             .map { _ in true }
+            .eraseToAnyPublisher()
+    }
+    
+    func sendTweet(tweet: Tweet) -> AnyPublisher<Bool, Error> {
+        db.collection(tweetsPath).document(tweet.id).setData(from: tweet)
+            .map { _ in true}
             .eraseToAnyPublisher()
     }
 }
