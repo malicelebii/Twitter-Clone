@@ -126,6 +126,17 @@ class ProfileTableViewHeader: UIView {
         return stackView
     }()
     
+    let followButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1)
+        button.tintColor = .white
+        button.layer.cornerRadius = 20
+        button.clipsToBounds = true
+        button.setTitle("Follow", for: .normal)
+        return button
+    }()
+    
     enum SectionTabs: String {
         case tweets = "Tweets"
         case tweetsAndReplies = "Tweets & Replies"
@@ -199,6 +210,7 @@ class ProfileTableViewHeader: UIView {
         addSubview(followersLabel)
         addSubview(sectionStack)
         addSubview(indicator)
+        addSubview(followButton)
     }
     
     func configureConstraints() {
@@ -228,6 +240,11 @@ class ProfileTableViewHeader: UIView {
             
             joinDateLabel.leadingAnchor.constraint(equalTo: joinDateImageView.trailingAnchor, constant: 5),
             joinDateLabel.topAnchor.constraint(equalTo: joinDateImageView.topAnchor),
+            
+            followButton.centerYAnchor.constraint(equalTo: joinDateLabel.centerYAnchor),
+            followButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            followButton.widthAnchor.constraint(equalToConstant: 90),
+            followButton.heightAnchor.constraint(equalToConstant: 40),
             
             followingCountLabel.leadingAnchor.constraint(equalTo: joinDateImageView.leadingAnchor),
             followingCountLabel.topAnchor.constraint(equalTo: joinDateImageView.bottomAnchor, constant: 10),
