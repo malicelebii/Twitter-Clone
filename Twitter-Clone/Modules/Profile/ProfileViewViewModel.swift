@@ -11,12 +11,14 @@ import FirebaseAuth
 
 protocol ProfileViewViewModelDelegate {
     func retrieveUser()
+    func fetchUserTweets()
 }
 
 final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate {
     var subscriptions: Set<AnyCancellable> = []
     @Published var user: TwitterUser?
     @Published var error: String?
+    @Published var tweets: [Tweet] = []
     
     let databaseManager: DatabaseManagerDelegate
     
@@ -29,6 +31,10 @@ final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate
         guard let id = Auth.auth().getUserID() else { return }
         
         databaseManager.retrieveUser(with: id)
+            .handleEvents(receiveOutput: {[weak self] user in
+                self?.user = user
+                self?.fetchUserTweets()
+            })
             .sink {[weak self] completion in
                 if case .failure(let error) = completion {
                     self?.error = error.localizedDescription
@@ -39,5 +45,18 @@ final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate
             }
             .store(in: &subscriptions)
 
+    }
+    
+    func fetchUserTweets() {
+        guard let user else { return }
+        databaseManager.retrieveTweets(authorID: user.id)
+            .sink {[weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error.localizedDescription
+                }
+            } receiveValue: {[weak self] tweets in
+                self?.tweets = tweets
+            }
+            .store(in: &subscriptions)
     }
 }
