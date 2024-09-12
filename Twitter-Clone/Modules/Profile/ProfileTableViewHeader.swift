@@ -303,4 +303,18 @@ class ProfileTableViewHeader: UIView {
         }
         selectedTab = 0
     }
+    
+    func configureFollowButtonToUnfollow() {
+        followButton.backgroundColor = .white
+        followButton.tintColor = UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1)
+        followButton.setTitle("Unfollow", for: .normal)
+        followButton.layer.borderWidth = 1
+        followButton.layer.borderColor = UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1).cgColor
+    }
+    
+    func configureFollowButtonToFollow() {
+        followButton.backgroundColor = UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1)
+        followButton.tintColor = .white
+        followButton.setTitle("Follow", for: .normal)
+    }
 }
