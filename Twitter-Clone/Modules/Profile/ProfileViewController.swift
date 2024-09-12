@@ -42,10 +42,6 @@ class ProfileViewController: UIViewController {
         configureProfileHeader()
         navigationController?.navigationBar.isHidden = true
         bindViews()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
         profileViewViewModel.retrieveUser()
     }
     
@@ -89,17 +85,25 @@ class ProfileViewController: UIViewController {
             self?.headerView.profileAvatarImageView.kf.setImage(with: URL(string: user.avatarPath))
         }
         .store(in: &subscriptions)
+        
+        profileViewViewModel.$tweets.sink {[weak self] _ in
+            DispatchQueue.main.async {
+                self?.profileTableView.reloadData()
+            }
+        }
+        .store(in: &subscriptions)
     }
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return profileViewViewModel.tweets.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier, for: indexPath) as! TweetTableViewCell
-        
+        let tweet = profileViewViewModel.tweets[indexPath.row]
+        cell.configureCell(with: tweet)
         return cell
     }
     
