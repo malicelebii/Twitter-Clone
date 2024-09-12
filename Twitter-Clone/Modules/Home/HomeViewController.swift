@@ -97,6 +97,13 @@ class HomeViewController: UIViewController {
             }
         }
         .store(in: &subscriptions)
+        
+        homeViewViewModel.$tweets.sink {[weak self] _ in
+            DispatchQueue.main.async {
+                self?.timelineTableView.reloadData()
+            }
+        }
+        .store(in: &subscriptions)
     }
     
     func completeUserOnbarding() {
@@ -130,15 +137,14 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return homeViewViewModel.tweets.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier, for: indexPath) as! TweetTableViewCell
         cell.delegate = self
-        cell.avatarImageView.image = UIImage(systemName: "person")
-        cell.displayNameLabel.text = "Mehmet Ali Çelebi"
-        cell.usernameLabel.text = "@malicelebi"
+        let tweet = homeViewViewModel.tweets[indexPath.row]
+        cell.configureCell(with: tweet)
         return cell
     }
 }
