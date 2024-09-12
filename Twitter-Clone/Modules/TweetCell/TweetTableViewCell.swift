@@ -151,6 +151,13 @@ class TweetTableViewCell: UITableViewCell {
         shareButton.addTarget(self, action: #selector(didTapShare), for: .touchUpInside)
     }
     
+    func configureCell(with tweet: Tweet) {
+        displayNameLabel.text = tweet.author.displayName
+        usernameLabel.text = "@ \(tweet.author.username)"
+        tweetTextContentLabel.text = tweet.tweetContent
+        avatarImageView.kf.setImage(with: URL(string: tweet.author.avatarPath))
+    }
+    
     @objc func didTapReply() {
         delegate?.didTapReply()
     }
