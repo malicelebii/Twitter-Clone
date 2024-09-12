@@ -12,13 +12,15 @@ import Combine
 protocol HomeViewViewModelDelegate {
     func handleAuthentication(completion: (UIViewController) -> Void)
     func signOut()
+    func fetchTweets()
 }
 
 final class HomeViewViewModel: HomeViewViewModelDelegate {
     let authManager: AuthManagerDelegate
     let databaseManager: DatabaseManagerDelegate
-    
+        
     @Published var user: TwitterUser?
+    @Published var tweets: [Tweet] = []
     @Published var error: String?
 
     var subscriptions: Set<AnyCancellable> = []
@@ -50,6 +52,20 @@ final class HomeViewViewModel: HomeViewViewModelDelegate {
                 }
             } receiveValue: {[weak self] user in
                 self?.user = user
+            }
+            .store(in: &subscriptions)
+
+    }
+    
+    func fetchTweets() {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        databaseManager.retrieveTweets(authorID: userID)
+            .sink {[weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error.localizedDescription
+                }
+            } receiveValue: {[weak self] tweets in
+                self?.tweets = tweets
             }
             .store(in: &subscriptions)
 
