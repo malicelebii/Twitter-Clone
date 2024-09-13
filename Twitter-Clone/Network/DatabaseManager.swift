@@ -17,6 +17,7 @@ protocol DatabaseManagerDelegate {
     func updateUserFields(fields: [String: Any], for id: String) -> AnyPublisher<Bool, Error>
     func sendTweet(tweet: Tweet) -> AnyPublisher<Bool, Error>
     func retrieveTweets(authorID: String) -> AnyPublisher<[Tweet], Error>
+    func search(with query: String) -> AnyPublisher<[TwitterUser], Error>
 }
 
 final class DatabaseManager: DatabaseManagerDelegate {
@@ -63,6 +64,18 @@ final class DatabaseManager: DatabaseManagerDelegate {
                 try snapShots.map({
                     try $0.data(as: Tweet.self)
                 })
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func search(with query: String) -> AnyPublisher<[TwitterUser], Error> {
+        db.collection(usersPath).whereField("username", isEqualTo: query)
+            .getDocuments()
+            .map(\.documents)
+            .tryMap { snapShots in
+                try snapShots.map {
+                    try $0.data(as: TwitterUser.self)
+                }
             }
             .eraseToAnyPublisher()
     }
