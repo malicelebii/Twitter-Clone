@@ -310,11 +310,23 @@ class ProfileTableViewHeader: UIView {
         followButton.setTitle("Unfollow", for: .normal)
         followButton.layer.borderWidth = 1
         followButton.layer.borderColor = UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1).cgColor
+        followButton.removeTarget(self, action: #selector(didTapFollowButton), for: .touchUpInside)
+        followButton.addTarget(self, action: #selector(didTapUnfollowButton), for: .touchUpInside)
     }
     
     func configureFollowButtonToFollow() {
         followButton.backgroundColor = UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1)
         followButton.tintColor = .white
         followButton.setTitle("Follow", for: .normal)
+        followButton.removeTarget(self, action: #selector(didTapUnfollowButton), for: .touchUpInside)
+        followButton.addTarget(self, action: #selector(didTapFollowButton), for: .touchUpInside)
+    }
+    
+    @objc func didTapFollowButton() {
+        profileView?.didTapFolllowButton()
+    }
+    
+    @objc func didTapUnfollowButton() {
+        profileView?.didTapUnfolllowButton()
     }
 }
