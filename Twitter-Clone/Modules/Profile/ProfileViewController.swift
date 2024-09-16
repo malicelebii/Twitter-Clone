@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import Kingfisher
+import FirebaseAuth
 
 protocol ProfileHeaderDelegate: AnyObject {
     func didTapFolllowButton()
@@ -57,6 +58,8 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         bindViews()
         headerView.profileView = self
+        guard let follower = Auth.auth().getUserID() else { return }
+        profileViewViewModel.isUserFollowed(follower: follower, following: profileViewViewModel.user.id)
     }
     
     func addSubviews() {
@@ -103,6 +106,16 @@ class ProfileViewController: UIViewController {
         profileViewViewModel.$tweets.sink {[weak self] _ in
             DispatchQueue.main.async {
                 self?.profileTableView.reloadData()
+            }
+        }
+        .store(in: &subscriptions)
+        
+        profileViewViewModel.$isFollowing.sink {[weak self] bool in
+            switch bool {
+            case true:
+                self?.headerView.configureFollowButtonToUnfollow()
+            case false:
+                self?.headerView.configureFollowButtonToFollow()
             }
         }
         .store(in: &subscriptions)
