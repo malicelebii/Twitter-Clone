@@ -22,6 +22,7 @@ class SearchResultsViewController: UIViewController {
         view.addSubview(searchResultsTableView)
         configureConstraints()
         searchResultsTableView.dataSource = self
+        searchResultsTableView.delegate = self
     }
 
     func configureConstraints() {
@@ -41,7 +42,7 @@ class SearchResultsViewController: UIViewController {
     }
 }
 
-extension SearchResultsViewController: UITableViewDataSource {
+extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResultsViewModel.users.count
     }
@@ -52,5 +53,13 @@ extension SearchResultsViewController: UITableViewDataSource {
         content.text = searchResultsViewModel.users[indexPath.row].displayName
         cell.contentConfiguration = content
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let user = searchResultsViewModel.users[indexPath.row]
+        let profileViewModel = ProfileViewViewModel(user: user)
+        let vc = ProfileViewController(profileViewViewModel: profileViewModel)
+        present(vc, animated: true)
     }
 }
