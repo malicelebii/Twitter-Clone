@@ -13,6 +13,7 @@ protocol ProfileViewViewModelDelegate {
     func fetchUserTweets()
     func follow(follower: String, following: String)
     func unfollow(follower: String, following: String)
+    func isUserFollowed(follower: String, following: String)
 }
 
 final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate {
@@ -20,6 +21,7 @@ final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate
     @Published var user: TwitterUser
     @Published var error: String?
     @Published var tweets: [Tweet] = []
+    @Published var isFollowing: Bool = false
     
     let databaseManager: DatabaseManagerDelegate
     
@@ -27,6 +29,8 @@ final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate
         self.databaseManager = databaseManager
         self.user = user
         self.fetchUserTweets()
+        guard let follower = Auth.auth().getUserID() else { return  }
+        self.isUserFollowed(follower: follower, following: user.id)
     }
     
     func fetchUserTweets() {
@@ -65,4 +69,16 @@ final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate
             .store(in: &subscriptions)
     }
     
+    func isUserFollowed(follower: String, following: String) {
+        databaseManager.isFollowing(follower: follower, following: following)
+            .sink {[weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error.localizedDescription
+                }
+            } receiveValue: {[weak self] following in
+                self?.isFollowing = following
+                print("following: \(following)")
+            }
+            .store(in: &subscriptions)
+    }
 }
