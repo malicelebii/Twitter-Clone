@@ -20,6 +20,7 @@ protocol DatabaseManagerDelegate {
     func search(with query: String) -> AnyPublisher<[TwitterUser], Error>
     func follow(follower: String, following: String) -> AnyPublisher<Bool, Error>
     func unFollow(follower: String, following: String) -> AnyPublisher<Bool, Error>
+    func isFollowing(follower: String, following: String) -> AnyPublisher<Bool, Error>
 }
 
 final class DatabaseManager: DatabaseManagerDelegate {
@@ -106,4 +107,13 @@ final class DatabaseManager: DatabaseManagerDelegate {
             .eraseToAnyPublisher()
     }
     
+    func isFollowing(follower: String, following: String) -> AnyPublisher<Bool, Error> {
+        db.collection("followings").whereField("follower", isEqualTo: follower).whereField("following", isEqualTo: following)
+            .getDocuments()
+            .map(\.count)
+            .map { count in
+                return count == 0 ? false : true
+            }
+            .eraseToAnyPublisher()
+    }
 }
