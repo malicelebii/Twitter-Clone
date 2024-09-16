@@ -10,8 +10,17 @@ import Combine
 import Kingfisher
 
 class ProfileViewController: UIViewController {
-    let profileViewViewModel = ProfileViewViewModel()
+    let profileViewViewModel: ProfileViewViewModel
     var subscriptions: Set<AnyCancellable> = []
+    
+    init(profileViewViewModel: ProfileViewViewModel) {
+        self.profileViewViewModel = profileViewViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError()
+    }
     
     let profileTableView: UITableView = {
         let profileTableView = UITableView()
@@ -42,7 +51,6 @@ class ProfileViewController: UIViewController {
         configureProfileHeader()
         navigationController?.navigationBar.isHidden = true
         bindViews()
-        profileViewViewModel.retrieveUser()
     }
     
     func addSubviews() {
@@ -76,7 +84,7 @@ class ProfileViewController: UIViewController {
     
     func bindViews() {
         profileViewViewModel.$user.sink { [weak self] user in
-            guard let user else { return }
+            
             self?.headerView.displayNameLabel.text = user.displayName
             self?.headerView.usernameLabel.text = "@" + user.username
             self?.headerView.followersCountLabel.text = "\(user.followersCount)"
