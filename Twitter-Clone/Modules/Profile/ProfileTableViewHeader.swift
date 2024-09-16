@@ -8,6 +8,8 @@
 import UIKit
 
 class ProfileTableViewHeader: UIView {
+    weak var profileView: ProfileHeaderDelegate?
+    
     var profileAvatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false

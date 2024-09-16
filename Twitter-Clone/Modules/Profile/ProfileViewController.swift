@@ -9,6 +9,11 @@ import UIKit
 import Combine
 import Kingfisher
 
+protocol ProfileHeaderDelegate: AnyObject {
+    func didTapFolllowButton()
+    func didTapUnfolllowButton()
+}
+
 class ProfileViewController: UIViewController {
     let profileViewViewModel: ProfileViewViewModel
     var subscriptions: Set<AnyCancellable> = []
@@ -51,6 +56,7 @@ class ProfileViewController: UIViewController {
         configureProfileHeader()
         navigationController?.navigationBar.isHidden = true
         bindViews()
+        headerView.profileView = self
     }
     
     func addSubviews() {
