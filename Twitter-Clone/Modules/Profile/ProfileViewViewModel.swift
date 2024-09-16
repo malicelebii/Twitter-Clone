@@ -11,6 +11,7 @@ import FirebaseAuth
 
 protocol ProfileViewViewModelDelegate {
     func fetchUserTweets()
+    func follow(follower: String, following: String)
 }
 
 final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate {
@@ -35,6 +36,18 @@ final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate
                 }
             } receiveValue: {[weak self] tweets in
                 self?.tweets = tweets
+            }
+            .store(in: &subscriptions)
+    }
+    
+    func follow(follower: String, following: String) {
+        databaseManager.follow(follower: follower, following: following)
+            .sink {[weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error.localizedDescription
+                }
+            } receiveValue: {[weak self] state in
+                self?.isFollowing = state
             }
             .store(in: &subscriptions)
     }
