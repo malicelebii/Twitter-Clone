@@ -12,6 +12,7 @@ import FirebaseAuth
 protocol ProfileViewViewModelDelegate {
     func fetchUserTweets()
     func follow(follower: String, following: String)
+    func unfollow(follower: String, following: String)
 }
 
 final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate {
@@ -51,4 +52,17 @@ final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate
             }
             .store(in: &subscriptions)
     }
+    
+    func unfollow(follower: String, following: String) {
+        databaseManager.unFollow(follower: follower, following: following)
+            .sink {[weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error.localizedDescription
+                }
+            } receiveValue: {[weak self] state in
+                self?.isFollowing = false
+            }
+            .store(in: &subscriptions)
+    }
+    
 }
