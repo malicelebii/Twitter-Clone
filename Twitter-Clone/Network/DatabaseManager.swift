@@ -18,6 +18,7 @@ protocol DatabaseManagerDelegate {
     func sendTweet(tweet: Tweet) -> AnyPublisher<Bool, Error>
     func retrieveTweets(authorID: String) -> AnyPublisher<[Tweet], Error>
     func search(with query: String) -> AnyPublisher<[TwitterUser], Error>
+    func follow(follower: String, following: String) -> AnyPublisher<Bool, Error>
 }
 
 final class DatabaseManager: DatabaseManagerDelegate {
@@ -79,4 +80,18 @@ final class DatabaseManager: DatabaseManagerDelegate {
             }
             .eraseToAnyPublisher()
     }
+    
+    func follow(follower: String, following: String) -> AnyPublisher<Bool, Error> {
+        let randomID = UUID().uuidString
+        let data = [
+            "follower": follower,
+            "following": following
+        ]
+        return db.collection("followings").document(randomID).setData(data)
+            .map { _ in
+                return true
+            }
+            .eraseToAnyPublisher()
+    }
+    
 }
