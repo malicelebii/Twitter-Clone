@@ -140,3 +140,15 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
 }
+
+extension ProfileViewController: ProfileHeaderDelegate {
+    func didTapFolllowButton() {
+        guard let follower = Auth.auth().getUserID() else { return }
+        profileViewViewModel.follow(follower: follower, following: profileViewViewModel.user.id)
+    }
+    
+    func didTapUnfolllowButton() {
+        guard let follower = Auth.auth().getUserID() else { return }
+        profileViewViewModel.unfollow(follower: follower, following: profileViewViewModel.user.id)
+    }
+}
