@@ -33,6 +33,22 @@ final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate
         self.isUserFollowed(follower: follower, following: user.id)
     }
     
+    func retrieveUser(with id: String) {
+        databaseManager.retrieveUser(with: id)
+            .handleEvents(receiveOutput: {[weak self] user in
+                self?.user = user
+            })
+            .sink {[weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error.localizedDescription
+                }
+            } receiveValue: {[weak self] user in
+                self?.user = user
+            }
+            .store(in: &subscriptions)
+
+    }
+    
     func fetchUserTweets() {
         databaseManager.retrieveTweets(authorID: user.id)
             .sink {[weak self] completion in
@@ -53,6 +69,7 @@ final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate
                 }
             } receiveValue: {[weak self] state in
                 self?.isFollowing = state
+                self?.retrieveUser(with: following)
             }
             .store(in: &subscriptions)
     }
@@ -65,6 +82,7 @@ final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate
                 }
             } receiveValue: {[weak self] state in
                 self?.isFollowing = false
+                self?.retrieveUser(with: following)
             }
             .store(in: &subscriptions)
     }
