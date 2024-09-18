@@ -61,6 +61,7 @@ final class DatabaseManager: DatabaseManagerDelegate {
     
     func retrieveTweets(authorID: String) -> AnyPublisher<[Tweet], Error> {
         db.collection(tweetsPath).whereField("authorID", isEqualTo: authorID)
+            .order(by: "timestamp", descending: true)
             .getDocuments()
             .tryMap (\.documents)
             .tryMap { snapShots in
