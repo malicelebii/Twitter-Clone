@@ -16,4 +16,5 @@ struct Tweet: Codable, Identifiable {
     var likers: [String]
     let isReply: Bool
     let parentReference: String?
+    let timestamp: Date
 }

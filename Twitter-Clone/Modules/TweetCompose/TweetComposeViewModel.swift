@@ -47,7 +47,7 @@ final class TweetComposeViewModel: ObservableObject, TweetComposeViewModelDelega
     
     func sendTweet() {
         guard let userID = user?.id, let user else { return }
-        let tweet = Tweet(author: user, authorID: userID, tweetContent: tweetContent, likesCount: 0, likers: [], isReply: false, parentReference: nil)
+        let tweet = Tweet(author: user, authorID: userID, tweetContent: tweetContent, likesCount: 0, likers: [], isReply: false, parentReference: nil, timestamp: Date())
         databaseManager.sendTweet(tweet: tweet)
             .sink {[weak self] completion in
                 if case .failure(let error) = completion {
