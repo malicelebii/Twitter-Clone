@@ -14,6 +14,7 @@ protocol ProfileViewViewModelDelegate {
     func follow(follower: String, following: String)
     func unfollow(follower: String, following: String)
     func isUserFollowed(follower: String, following: String)
+    func isUserCurrentUser() -> Bool
 }
 
 final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate {
@@ -98,5 +99,9 @@ final class ProfileViewViewModel: ObservableObject, ProfileViewViewModelDelegate
                 print("following: \(following)")
             }
             .store(in: &subscriptions)
+    }
+    
+    func isUserCurrentUser() -> Bool {
+        return user.id == Auth.auth().getUserID()
     }
 }
