@@ -46,6 +46,15 @@ class TweetTableViewCell: UITableViewCell {
         return label
     }()
     
+    let sentTimeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.textColor = .secondaryLabel
+        label.text = "- 16s"
+        return label
+    }()
+    
     let tweetTextContentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -101,6 +110,7 @@ class TweetTableViewCell: UITableViewCell {
         contentView.addSubview(avatarImageView)
         contentView.addSubview(displayNameLabel)
         contentView.addSubview(usernameLabel)
+        contentView.addSubview(sentTimeLabel)
         contentView.addSubview(tweetTextContentLabel)
         contentView.addSubview(replyButton)
         contentView.addSubview(retweetButton)
@@ -120,6 +130,9 @@ class TweetTableViewCell: UITableViewCell {
             
             usernameLabel.leadingAnchor.constraint(equalTo: displayNameLabel.trailingAnchor, constant: 10),
             usernameLabel.centerYAnchor.constraint(equalTo: displayNameLabel.centerYAnchor),
+            
+            sentTimeLabel.leadingAnchor.constraint(equalTo: usernameLabel.trailingAnchor, constant: 10),
+            sentTimeLabel.centerYAnchor.constraint(equalTo: usernameLabel.centerYAnchor),
             
             tweetTextContentLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 20),
             tweetTextContentLabel.topAnchor.constraint(equalTo: displayNameLabel.bottomAnchor, constant: 10),
@@ -156,6 +169,12 @@ class TweetTableViewCell: UITableViewCell {
         usernameLabel.text = "@ \(tweet.author.username)"
         tweetTextContentLabel.text = tweet.tweetContent
         avatarImageView.kf.setImage(with: URL(string: tweet.author.avatarPath))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d, yyyy 'at' h:mm:ss a zzz" // Örneğin: September 18, 2024 at 12:00:00 AM UTC+3
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        let from = dateFormatter.string(from: tweet.timestamp)
+        let to = dateFormatter.string(from: Date())
+        sentTimeLabel.text = "- \(DateCalculator.shared.timeDifference(from: from, to: to))"
     }
     
     @objc func didTapReply() {
