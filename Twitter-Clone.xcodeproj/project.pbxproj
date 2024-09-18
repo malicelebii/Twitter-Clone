@@ -46,6 +46,7 @@
 		35C8F45A2C91CD9400123A91 /* TweetComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F4592C91CD9400123A91 /* TweetComposeViewController.swift */; };
 		35C8F45C2C91D3DD00123A91 /* TweetComposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F45B2C91D3DD00123A91 /* TweetComposeViewModel.swift */; };
 		35C8F45E2C91D5EE00123A91 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F45D2C91D5EE00123A91 /* Tweet.swift */; };
+		35DF1FB52C9AB67600BE14D3 /* DateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DF1FB42C9AB67600BE14D3 /* DateCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		35C8F4592C91CD9400123A91 /* TweetComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetComposeViewController.swift; sourceTree = "<group>"; };
 		35C8F45B2C91D3DD00123A91 /* TweetComposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetComposeViewModel.swift; sourceTree = "<group>"; };
 		35C8F45D2C91D5EE00123A91 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		35DF1FB42C9AB67600BE14D3 /* DateCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 		35C8F3B12C85B16000123A91 /* Twitter-Clone */ = {
 			isa = PBXGroup;
 			children = (
+				35DF1FB32C9AB65900BE14D3 /* Helpers */,
 				35C8F4432C8AD2A500123A91 /* Models */,
 				35C8F4172C88411500123A91 /* Network */,
 				35C8F3C72C85B41000123A91 /* Modules */,
@@ -294,6 +297,14 @@
 			path = TweetCompose;
 			sourceTree = "<group>";
 		};
+		35DF1FB32C9AB65900BE14D3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				35DF1FB42C9AB67600BE14D3 /* DateCalculator.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -385,6 +396,7 @@
 				35C8F45A2C91CD9400123A91 /* TweetComposeViewController.swift in Sources */,
 				35C8F3B72C85B16000123A91 /* MainTabBarViewController.swift in Sources */,
 				35C8F4522C8F2E8500123A91 /* StorageManager.swift in Sources */,
+				35DF1FB52C9AB67600BE14D3 /* DateCalculator.swift in Sources */,
 				35C8F3B32C85B16000123A91 /* AppDelegate.swift in Sources */,
 				35C8F4422C8AD13F00123A91 /* DatabaseManager.swift in Sources */,
 				35C8F4142C87232B00123A91 /* RegisterViewController.swift in Sources */,
