@@ -90,6 +90,8 @@ final class DatabaseManager: DatabaseManagerDelegate {
             "follower": follower,
             "following": following
         ]
+        db.collection(usersPath).document(follower).updateData(["followingCount": FieldValue.increment(Int64(1))])
+        db.collection(usersPath).document(following).updateData(["followersCount": FieldValue.increment(Int64(1))])
         return db.collection("followings").document(randomID).setData(data)
             .map { _ in
                 return true
@@ -98,7 +100,10 @@ final class DatabaseManager: DatabaseManagerDelegate {
     }
     
     func unFollow(follower: String, following: String) -> AnyPublisher<Bool, Error> {
-        db.collection("followings").whereField("follower", isEqualTo: follower).whereField("following", isEqualTo: following)
+        db.collection(usersPath).document(follower).updateData(["followingCount": FieldValue.increment(Int64(-1))])
+        db.collection(usersPath).document(following).updateData(["followersCount": FieldValue.increment(Int64(-1))])
+        
+        return db.collection("followings").whereField("follower", isEqualTo: follower).whereField("following", isEqualTo: following)
             .getDocuments()
             .map(\.documents.first)
             .map { query in
