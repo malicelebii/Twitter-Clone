@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController {
         return view
     }()
     
-    lazy var headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0, width: profileTableView.frame.width, height: 390))
+    lazy var headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0, width: profileTableView.frame.width, height: 390), isCurrentUser: profileViewViewModel.isUserCurrentUser())
     
     var isStatusBarHidden: Bool = true
     

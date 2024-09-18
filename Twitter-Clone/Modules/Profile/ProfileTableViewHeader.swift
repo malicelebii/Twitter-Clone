@@ -187,11 +187,12 @@ class ProfileTableViewHeader: UIView {
     var leadingAnchors: [NSLayoutConstraint] = []
     var trailingAnchors: [NSLayoutConstraint] = []
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, isCurrentUser: Bool) {
         super.init(frame: frame)
         addSubviews()
         configureConstraints()
         configureStackButtons()
+        followButton.isHidden = isCurrentUser
     }
     
     required init?(coder: NSCoder) {
