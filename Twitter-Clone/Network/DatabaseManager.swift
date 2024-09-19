@@ -21,6 +21,7 @@ protocol DatabaseManagerDelegate {
     func follow(follower: String, following: String) -> AnyPublisher<Bool, Error>
     func unFollow(follower: String, following: String) -> AnyPublisher<Bool, Error>
     func isFollowing(follower: String, following: String) -> AnyPublisher<Bool, Error>
+    func getFollowings(for userID: String) -> AnyPublisher<[String], Error>
 }
 
 final class DatabaseManager: DatabaseManagerDelegate {
@@ -70,6 +71,19 @@ final class DatabaseManager: DatabaseManagerDelegate {
                 })
             }
             .eraseToAnyPublisher()
+    }
+    
+    func getFollowings(for userID: String) -> AnyPublisher<[String], Error> {
+           db.collection("followings").whereField("follower", isEqualTo: userID)
+               .getDocuments()
+               .tryMap(\.documents)
+               .tryMap { snapShots in
+                   try snapShots.compactMap { snapshot -> String? in
+                       let data = try snapshot.data(as: [String: String].self)
+                       return data["following"]
+                   }
+               }
+               .eraseToAnyPublisher()
     }
     
     func search(with query: String) -> AnyPublisher<[TwitterUser], Error> {
