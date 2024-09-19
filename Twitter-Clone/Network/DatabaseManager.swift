@@ -23,6 +23,7 @@ protocol DatabaseManagerDelegate {
     func isFollowing(follower: String, following: String) -> AnyPublisher<Bool, Error>
     func getFollowings(for userID: String) -> AnyPublisher<[String], Error>
     func retrieveTweetsForUsers(userIDs: [String]) -> AnyPublisher<[Tweet], Error>
+    func retrieveUserAndFollowingTweets(for userID: String) -> AnyPublisher<[Tweet], Error>
 }
 
 final class DatabaseManager: DatabaseManagerDelegate {
@@ -100,6 +101,15 @@ final class DatabaseManager: DatabaseManagerDelegate {
              }
              .eraseToAnyPublisher()
      }
+    
+    func retrieveUserAndFollowingTweets(for userID: String) -> AnyPublisher<[Tweet], Error> {
+           getFollowings(for: userID)
+               .flatMap { followingIDs -> AnyPublisher<[Tweet], Error> in
+                   let allIDs = [userID] + followingIDs
+                   return self.retrieveTweetsForUsers(userIDs: allIDs)
+               }
+               .eraseToAnyPublisher()
+       }
     
     func search(with query: String) -> AnyPublisher<[TwitterUser], Error> {
         db.collection(usersPath).whereField("username", isEqualTo: query)
