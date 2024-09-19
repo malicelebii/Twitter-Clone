@@ -63,7 +63,7 @@ final class HomeViewViewModel: HomeViewViewModelDelegate {
     
     func fetchTweets() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
-        databaseManager.retrieveTweets(authorID: userID)
+        databaseManager.retrieveUserAndFollowingTweets(for: userID)
             .sink {[weak self] completion in
                 if case .failure(let error) = completion {
                     self?.error = error.localizedDescription
