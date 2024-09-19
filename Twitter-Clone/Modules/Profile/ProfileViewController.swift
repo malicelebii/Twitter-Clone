@@ -100,6 +100,10 @@ class ProfileViewController: UIViewController {
             self?.headerView.followingCountLabel.text = "\(user.followingCount)"
             self?.headerView.userBioLabel.text = user.bio
             self?.headerView.profileAvatarImageView.kf.setImage(with: URL(string: user.avatarPath))
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMMM yyyy"
+            let date = dateFormatter.string(from: user.createdOn)
+            self?.headerView.joinDateLabel.text = date
         }
         .store(in: &subscriptions)
         
