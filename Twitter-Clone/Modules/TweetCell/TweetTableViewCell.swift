@@ -190,10 +190,14 @@ class TweetTableViewCell: UITableViewCell {
     @objc func didTapLike() {
         guard let tweetId else { return }
         delegate?.didTapLike(tweetId: tweetId)
-        likeButton.tintColor = .systemPink
+        likeButton.tintColor =  likeButton.tintColor  == .systemPink ? .systemGray2 : .systemPink
     }
     
     @objc func didTapShare() {
         delegate?.didTapShare()
+    }
+    
+    func setLiked(_ isLiked: Bool) {
+        likeButton.tintColor = isLiked ? .systemPink : .systemGray2
     }
 }
