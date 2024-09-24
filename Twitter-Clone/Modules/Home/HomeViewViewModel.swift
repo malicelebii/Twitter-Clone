@@ -24,6 +24,7 @@ final class HomeViewViewModel: HomeViewViewModelDelegate {
     @Published var user: TwitterUser?
     @Published var tweets: [Tweet] = []
     @Published var error: String?
+    @Published var likedTweets: Set<String> = []
 
     var subscriptions: Set<AnyCancellable> = []
     
@@ -84,8 +85,10 @@ final class HomeViewViewModel: HomeViewViewModelDelegate {
                 if case .failure(let error) = completion {
                     self?.error = error.localizedDescription
                 }
-            } receiveValue: { liked in
-              
+            } receiveValue: {[weak self] liked in
+                if liked {
+                    self?.likedTweets.insert(tweetId)
+                }
             }
             .store(in: &subscriptions)
     }
@@ -97,10 +100,16 @@ final class HomeViewViewModel: HomeViewViewModelDelegate {
                 if case .failure(let error) = completion {
                     self?.error = error.localizedDescription
                 }
-            } receiveValue: { unliked in
-              print("unliked")
+            } receiveValue: {[weak self] unliked in
+                if unliked {
+                    self?.likedTweets.remove(tweetId)
+                }
             }
             .store(in: &subscriptions)
 
+    }
+    
+    func isTweetLiked(tweetId: String) -> Bool {
+        return likedTweets.contains(tweetId)
     }
 }
