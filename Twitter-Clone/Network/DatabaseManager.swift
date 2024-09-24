@@ -25,6 +25,7 @@ protocol DatabaseManagerDelegate {
     func retrieveTweetsForUsers(userIDs: [String]) -> AnyPublisher<[Tweet], Error>
     func retrieveUserAndFollowingTweets(for userID: String) -> AnyPublisher<[Tweet], Error>
     func likeTweet(userId: String,tweetId: String) -> AnyPublisher<Bool, Error>
+    func unlikeTweet(userId: String,tweetId: String) -> AnyPublisher<Bool, Error>
 }
 
 final class DatabaseManager: DatabaseManagerDelegate {
@@ -166,6 +167,17 @@ final class DatabaseManager: DatabaseManagerDelegate {
     func likeTweet(userId: String, tweetId: String) -> AnyPublisher<Bool, any Error> {
         return db.collection("likes").document().setData(["userId": userId, "tweetId": tweetId])
             .map { _ in true }
+            .eraseToAnyPublisher()
+    }
+    
+    func unlikeTweet(userId: String, tweetId: String) -> AnyPublisher<Bool, any Error> {
+        db.collection("likes").whereField("userId", isEqualTo: userId).whereField("tweetId", isEqualTo: tweetId)
+            .getDocuments()
+            .map(\.documents.first)
+            .map { query in
+                query?.reference.delete(completion: nil)
+                return true
+            }
             .eraseToAnyPublisher()
     }
 }
