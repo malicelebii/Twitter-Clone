@@ -10,7 +10,7 @@ import UIKit
 protocol TweetTableViewCellDelegate: AnyObject {
     func didTapReply()
     func didTapRetweet()
-    func didTapLike()
+    func didTapLike(tweetId: String)
     func didTapShare()
 }
 
@@ -18,6 +18,7 @@ class TweetTableViewCell: UITableViewCell {
     static let identifier = "TweetTableViewCell"
     
     weak var delegate: TweetTableViewCellDelegate?
+    var tweetId: String?
     
     let avatarImageView: UIImageView = {
         let imageView = UIImageView()
@@ -165,6 +166,7 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     func configureCell(with tweet: Tweet) {
+        tweetId = tweet.id
         displayNameLabel.text = tweet.author.displayName
         usernameLabel.text = "@ \(tweet.author.username)"
         tweetTextContentLabel.text = tweet.tweetContent
@@ -186,7 +188,9 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     @objc func didTapLike() {
-        delegate?.didTapLike()
+        guard let tweetId else { return }
+        delegate?.didTapLike(tweetId: tweetId)
+        likeButton.tintColor = .systemPink
     }
     
     @objc func didTapShare() {

@@ -161,6 +161,7 @@ extension HomeViewController: TweetTableViewCellDelegate {
     }
     
     func didTapLike() {
+    func didTapLike(tweetId: String) {
         print("like")
     }
     
