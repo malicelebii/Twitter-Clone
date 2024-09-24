@@ -160,9 +160,9 @@ extension HomeViewController: TweetTableViewCellDelegate {
         print("retweet")
     }
     
-    func didTapLike() {
     func didTapLike(tweetId: String) {
         print("like")
+        homeViewViewModel.likeTweet(tweetId: tweetId)
     }
     
     func didTapShare() {
