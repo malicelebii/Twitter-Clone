@@ -26,6 +26,8 @@ protocol DatabaseManagerDelegate {
     func retrieveUserAndFollowingTweets(for userID: String) -> AnyPublisher<[Tweet], Error>
     func likeTweet(userId: String,tweetId: String) -> AnyPublisher<Bool, Error>
     func unlikeTweet(userId: String,tweetId: String) -> AnyPublisher<Bool, Error>
+    func isTweetLiked(userId: String,tweetId: String) -> AnyPublisher<Bool, Error>
+    func fetchLikedTweets(userId: String) -> AnyPublisher<[String], Error>
 }
 
 final class DatabaseManager: DatabaseManagerDelegate {
@@ -177,6 +179,30 @@ final class DatabaseManager: DatabaseManagerDelegate {
             .map { query in
                 query?.reference.delete(completion: nil)
                 return true
+            }
+            .eraseToAnyPublisher()
+    }
+
+    func isTweetLiked(userId: String, tweetId: String) -> AnyPublisher<Bool, any Error> {
+        db.collection("likes").whereField("userId", isEqualTo: userId).whereField("tweetId", isEqualTo: tweetId)
+            .getDocuments()
+            .map(\.count)
+            .map { count in
+                return count == 0 ? false : true
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchLikedTweets(userId: String) -> AnyPublisher<[String], Error> {
+        db.collection("likes")
+            .whereField("userId", isEqualTo: userId)
+            .getDocuments()
+            .tryMap(\.documents)
+            .tryMap { snapshots in
+                try snapshots.compactMap { document -> String? in
+                    let data = try document.data(as: [String: String].self)
+                    return data["tweetId"]
+                }
             }
             .eraseToAnyPublisher()
     }
