@@ -13,6 +13,7 @@ protocol HomeViewViewModelDelegate {
     func handleAuthentication(completion: (UIViewController) -> Void)
     func signOut()
     func fetchTweets()
+    func likeTweet(tweetId: String)
 }
 
 final class HomeViewViewModel: HomeViewViewModelDelegate {
@@ -73,5 +74,18 @@ final class HomeViewViewModel: HomeViewViewModelDelegate {
             }
             .store(in: &subscriptions)
 
+    }
+    
+    func likeTweet(tweetId: String) {
+        guard let userId = Auth.auth().getUserID() else { return }
+        databaseManager.likeTweet(userId: userId, tweetId: tweetId)
+            .sink {[weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error.localizedDescription
+                }
+            } receiveValue: { liked in
+              
+            }
+            .store(in: &subscriptions)
     }
 }
