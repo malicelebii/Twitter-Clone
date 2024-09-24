@@ -14,6 +14,7 @@ protocol HomeViewViewModelDelegate {
     func signOut()
     func fetchTweets()
     func likeTweet(tweetId: String)
+    func unlikeTweet(tweetId: String)
 }
 
 final class HomeViewViewModel: HomeViewViewModelDelegate {
@@ -87,5 +88,19 @@ final class HomeViewViewModel: HomeViewViewModelDelegate {
               
             }
             .store(in: &subscriptions)
+    }
+    
+    func unlikeTweet(tweetId: String) {
+        guard let userId = Auth.auth().getUserID() else { return }
+        databaseManager.unlikeTweet(userId: userId, tweetId: tweetId)
+            .sink {[weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.error = error.localizedDescription
+                }
+            } receiveValue: { unliked in
+              print("unliked")
+            }
+            .store(in: &subscriptions)
+
     }
 }
