@@ -63,6 +63,8 @@ class HomeViewController: UIViewController {
             present(vc, animated: true)
         }
         homeViewViewModel.retrieveUser()
+        guard let userId = Auth.auth().getUserID() else { return }
+        homeViewViewModel.fetchLikedTweets(for: userId)
     }
     
     func configureNavigationBar() {
@@ -146,6 +148,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier, for: indexPath) as! TweetTableViewCell
         cell.delegate = self
         let tweet = homeViewViewModel.tweets[indexPath.row]
+        cell.setLiked(homeViewViewModel.isTweetLiked(tweetId: tweet.id))
         cell.configureCell(with: tweet)
         return cell
     }
@@ -161,8 +164,11 @@ extension HomeViewController: TweetTableViewCellDelegate {
     }
     
     func didTapLike(tweetId: String) {
-        print("like")
-        homeViewViewModel.likeTweet(tweetId: tweetId)
+        if homeViewViewModel.isTweetLiked(tweetId: tweetId) {
+            homeViewViewModel.unlikeTweet(tweetId: tweetId)
+        } else {
+            homeViewViewModel.likeTweet(tweetId: tweetId)
+        }
     }
     
     func didTapShare() {
