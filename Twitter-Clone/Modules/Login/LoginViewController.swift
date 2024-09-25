@@ -49,6 +49,15 @@ class LoginViewController: UIViewController {
         return register
     }()
     
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .systemGray
+        activityIndicator.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -63,6 +72,7 @@ class LoginViewController: UIViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
+        view.addSubview(activityIndicator)
     }
     
     func configureConstraints() {
@@ -85,7 +95,10 @@ class LoginViewController: UIViewController {
             loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
             loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             loginButton.heightAnchor.constraint(equalToConstant: 60),
-            loginButton.widthAnchor.constraint(equalToConstant: 180)
+            loginButton.widthAnchor.constraint(equalToConstant: 180),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
     
@@ -125,9 +138,14 @@ class LoginViewController: UIViewController {
             self?.present(ac, animated: true)
         }
         .store(in: &subscriptions)
+        
+        authenticationViewModel.didEndProcess = { [weak self] in
+            self?.activityIndicator.stopAnimating()
+        }
     }
     
     @objc func didTapLogin() {
+        activityIndicator.startAnimating()
         authenticationViewModel.login()
     }
 }

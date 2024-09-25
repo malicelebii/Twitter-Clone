@@ -50,6 +50,16 @@ class RegisterViewController: UIViewController {
         return register
     }()
     
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .systemGray
+        activityIndicator.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -64,6 +74,7 @@ class RegisterViewController: UIViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(registerButton)
+        view.addSubview(activityIndicator)
     }
     
     func configureConstraints() {
@@ -86,7 +97,10 @@ class RegisterViewController: UIViewController {
             registerButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
             registerButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             registerButton.heightAnchor.constraint(equalToConstant: 60),
-            registerButton.widthAnchor.constraint(equalToConstant: 180)
+            registerButton.widthAnchor.constraint(equalToConstant: 180),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
     
@@ -101,6 +115,7 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func didTapRegister() {
+        activityIndicator.startAnimating()
         authenticationViewModel.createUser()
     }
     
@@ -118,5 +133,9 @@ class RegisterViewController: UIViewController {
             guard let vc = self?.navigationController?.viewControllers.first as? OnboardingViewController else { return }
             vc.dismiss(animated: true)
         } .store(in: &subscriptions)
+        
+        authenticationViewModel.didEndProcess = { [weak self] in
+            self?.activityIndicator.stopAnimating()
+        }
     }
 }
