@@ -31,6 +31,15 @@ class HomeViewController: UIViewController {
         return tableView
     }()
     
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .systemGray
+        activityIndicator.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
@@ -44,6 +53,7 @@ class HomeViewController: UIViewController {
     func addSubViews() {
         view.addSubview(timelineTableView)
         view.addSubview(composeTweetButton)
+        view.addSubview(activityIndicator)
     }
     
     func setupTimeLineTableView() {
@@ -54,6 +64,7 @@ class HomeViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         timelineTableView.frame = view.frame
+        activityIndicator.bounds = view.bounds
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +73,7 @@ class HomeViewController: UIViewController {
         homeViewViewModel.handleAuthentication { vc in
             present(vc, animated: true)
         }
+        activityIndicator.startAnimating()
         homeViewViewModel.retrieveUser()
         guard let userId = Auth.auth().getUserID() else { return }
         homeViewViewModel.fetchLikedTweets(for: userId)
@@ -88,7 +100,12 @@ class HomeViewController: UIViewController {
             composeTweetButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -125),
             composeTweetButton.heightAnchor.constraint(equalToConstant: 60),
             composeTweetButton.widthAnchor.constraint(equalToConstant: 60),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
+        
+        
     }
     
     func bindViews() {
@@ -103,9 +120,15 @@ class HomeViewController: UIViewController {
         homeViewViewModel.$tweets.sink {[weak self] _ in
             DispatchQueue.main.async {
                 self?.timelineTableView.reloadData()
+
             }
         }
         .store(in: &subscriptions)
+        
+        homeViewViewModel.onTweetsFetched = {[weak self] in
+            self?.activityIndicator.stopAnimating()
+        }
+            
     }
     
     func completeUserOnbarding() {

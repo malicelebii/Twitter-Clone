@@ -28,6 +28,7 @@ final class HomeViewViewModel: HomeViewViewModelDelegate {
     @Published var likedTweets: Set<String> = []
 
     var subscriptions: Set<AnyCancellable> = []
+    var onTweetsFetched: (() -> Void)?
     
     init(authManager: AuthManagerDelegate = AuthManager.shared, databaseManager: DatabaseManagerDelegate = DatabaseManager.shared) {
         self.authManager = authManager
@@ -72,6 +73,7 @@ final class HomeViewViewModel: HomeViewViewModelDelegate {
                 if case .failure(let error) = completion {
                     self?.error = error.localizedDescription
                 }
+                self?.onTweetsFetched?()
             } receiveValue: {[weak self] tweets in
                 self?.tweets = tweets
             }
