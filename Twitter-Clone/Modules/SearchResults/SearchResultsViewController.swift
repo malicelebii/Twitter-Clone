@@ -13,7 +13,7 @@ class SearchResultsViewController: UIViewController {
     let searchResultsTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.identifier)
         return tableView
     }()
     
@@ -48,10 +48,9 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        var content = cell.defaultContentConfiguration()
-        content.text = searchResultsViewModel.users[indexPath.row].displayName
-        cell.contentConfiguration = content
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultCell.identifier, for: indexPath) as! SearchResultCell
+        let user = searchResultsViewModel.users[indexPath.row]
+        cell.configure(with: user)
         return cell
     }
     
@@ -61,5 +60,9 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
         let profileViewModel = ProfileViewViewModel(user: user)
         let vc = ProfileViewController(profileViewViewModel: profileViewModel)
         present(vc, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }

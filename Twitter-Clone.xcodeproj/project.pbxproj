@@ -10,6 +10,7 @@
 		359DF20C2C94773F00085EA0 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359DF20B2C94773F00085EA0 /* SearchResultsViewController.swift */; };
 		359DF20E2C947A4C00085EA0 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359DF20D2C947A4C00085EA0 /* SearchViewModel.swift */; };
 		359DF2102C947AA100085EA0 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359DF20F2C947AA100085EA0 /* SearchResultsViewModel.swift */; };
+		35C34E0D2CA4069400D36562 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C34E0C2CA4069400D36562 /* SearchResultCell.swift */; };
 		35C8F3B32C85B16000123A91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F3B22C85B16000123A91 /* AppDelegate.swift */; };
 		35C8F3B52C85B16000123A91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F3B42C85B16000123A91 /* SceneDelegate.swift */; };
 		35C8F3B72C85B16000123A91 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C8F3B62C85B16000123A91 /* MainTabBarViewController.swift */; };
@@ -53,6 +54,7 @@
 		359DF20B2C94773F00085EA0 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		359DF20D2C947A4C00085EA0 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		359DF20F2C947AA100085EA0 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
+		35C34E0C2CA4069400D36562 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		35C8F3AF2C85B16000123A91 /* Twitter-Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Twitter-Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35C8F3B22C85B16000123A91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35C8F3B42C85B16000123A91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				359DF20B2C94773F00085EA0 /* SearchResultsViewController.swift */,
 				359DF20F2C947AA100085EA0 /* SearchResultsViewModel.swift */,
+				35C34E0C2CA4069400D36562 /* SearchResultCell.swift */,
 			);
 			path = SearchResults;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				359DF20C2C94773F00085EA0 /* SearchResultsViewController.swift in Sources */,
 				35C8F41A2C88412B00123A91 /* AuthManager.swift in Sources */,
 				35C8F45A2C91CD9400123A91 /* TweetComposeViewController.swift in Sources */,
+				35C34E0D2CA4069400D36562 /* SearchResultCell.swift in Sources */,
 				35C8F3B72C85B16000123A91 /* MainTabBarViewController.swift in Sources */,
 				35C8F4522C8F2E8500123A91 /* StorageManager.swift in Sources */,
 				35DF1FB52C9AB67600BE14D3 /* DateCalculator.swift in Sources */,
