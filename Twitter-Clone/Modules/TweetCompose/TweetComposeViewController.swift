@@ -87,7 +87,7 @@ class TweetComposeViewController: UIViewController {
             tweetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
             tweetButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -10),
             tweetButton.widthAnchor.constraint(equalToConstant: 120),
-            tweetButton.heightAnchor.constraint(equalToConstant: 40),
+            tweetButton.heightAnchor.constraint(equalToConstant: 60),
             
             tweetContentTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tweetContentTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
