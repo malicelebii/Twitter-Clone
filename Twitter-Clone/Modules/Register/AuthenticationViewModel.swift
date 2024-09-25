@@ -27,6 +27,8 @@ final class AuthenticationViewModel: ObservableObject, AuthenticationViewModelDe
     let authManager: AuthManagerDelegate
     let databaseManager: DatabaseManagerDelegate
     
+    var didEndProcess: (() -> Void)?
+    
     init(authManager: AuthManagerDelegate = AuthManager.shared, databaseManager: DatabaseManagerDelegate = DatabaseManager.shared) {
         self.authManager = authManager
         self.databaseManager = databaseManager
@@ -49,8 +51,8 @@ final class AuthenticationViewModel: ObservableObject, AuthenticationViewModelDe
             .handleEvents(receiveOutput: {[weak self] user in
                 self?.user = user
             })
-            .sink { _ in
-                
+            .sink {[weak self] _ in
+                self?.didEndProcess?()
             } receiveValue: { [weak self] user in
                 self?.createRecord(for: user)
             }
@@ -63,6 +65,7 @@ final class AuthenticationViewModel: ObservableObject, AuthenticationViewModelDe
                 if case .failure(let error) = completion {
                     self?.error = error.localizedDescription
                 }
+                self?.didEndProcess?()
             } receiveValue: { state in
                 print("Adding user record to database: \(state)")
             }
